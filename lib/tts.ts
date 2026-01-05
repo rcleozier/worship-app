@@ -38,22 +38,102 @@ class TTSService {
   }
 
   /**
-   * Get the best voice for Bible reading (prefer male, clear voices)
+   * Get the best voice for Bible reading (prefer premium, natural voices)
+   * Uses improved voice selection algorithm
    */
   getBestVoice(): SpeechSynthesisVoice | null {
     const voices = this.getVoices()
     if (voices.length === 0) return null
 
-    // Prefer voices with "male" or clear names, or default to first English voice
-    const preferred = voices.find(
-      (v) =>
-        v.name.toLowerCase().includes("male") ||
-        v.name.toLowerCase().includes("david") ||
-        v.name.toLowerCase().includes("daniel") ||
-        v.name.toLowerCase().includes("mark")
+    // Priority order for better quality voices:
+    // 1. Neural/premium voices (Google, Microsoft, Amazon)
+    // 2. High-quality system voices (Samantha, Alex, Daniel on macOS; Zira on Windows)
+    // 3. Male voices (often sound more natural for Bible reading)
+    
+    const voiceNames = voices.map(v => v.name.toLowerCase())
+    
+    // Try to find neural/premium voices first
+    const neuralVoices = voices.filter(
+      (v) => {
+        const name = v.name.toLowerCase()
+        return (
+          name.includes("neural") ||
+          name.includes("premium") ||
+          name.includes("enhanced") ||
+          name.includes("wave") ||
+          name.includes("google") ||
+          name.includes("microsoft") ||
+          name.includes("amazon")
+        )
+      }
     )
 
-    return preferred || voices[0] || null
+    if (neuralVoices.length > 0) {
+      // Prefer male voices among neural options
+      const maleNeural = neuralVoices.find(
+        (v) => {
+          const name = v.name.toLowerCase()
+          return (
+            name.includes("male") ||
+            name.includes("daniel") ||
+            name.includes("david") ||
+            name.includes("mark") ||
+            name.includes("alex")
+          )
+        }
+      )
+      return maleNeural || neuralVoices[0]
+    }
+
+    // Try high-quality system voices (macOS and Windows premium voices)
+    const systemPremium = voices.filter(
+      (v) => {
+        const name = v.name.toLowerCase()
+        return (
+          name.includes("samantha") || // macOS high-quality female
+          name.includes("alex") || // macOS high-quality male
+          name.includes("daniel") || // macOS high-quality male
+          name.includes("zira") || // Windows high-quality female
+          name.includes("david") // Windows high-quality male
+        )
+      }
+    )
+
+    if (systemPremium.length > 0) {
+      // Prefer male voices
+      const maleSystem = systemPremium.find(
+        (v) => {
+          const name = v.name.toLowerCase()
+          return (
+            name.includes("alex") ||
+            name.includes("daniel") ||
+            name.includes("david")
+          )
+        }
+      )
+      return maleSystem || systemPremium[0]
+    }
+
+    // Fallback to any male voices
+    const maleVoices = voices.filter(
+      (v) => {
+        const name = v.name.toLowerCase()
+        return (
+          name.includes("male") ||
+          name.includes("david") ||
+          name.includes("daniel") ||
+          name.includes("mark") ||
+          name.includes("alex")
+        )
+      }
+    )
+
+    if (maleVoices.length > 0) {
+      return maleVoices[0]
+    }
+
+    // Final fallback: first English voice
+    return voices[0] || null
   }
 
   /**
@@ -83,10 +163,15 @@ class TTSService {
       utterance.voice = voice
     }
 
-    // Set options
-    utterance.rate = options.rate ?? 1
-    utterance.pitch = options.pitch ?? 1
-    utterance.volume = options.volume ?? 1
+    // Set options with optimized values for natural speech
+    utterance.rate = Math.max(0.5, Math.min(2, options.rate ?? 1)) // Clamp between 0.5 and 2
+    utterance.pitch = Math.max(0.5, Math.min(2, options.pitch ?? 1)) // Clamp between 0.5 and 2
+    utterance.volume = Math.max(0, Math.min(1, options.volume ?? 1)) // Clamp between 0 and 1
+    
+    // Adjust pitch slightly lower for more natural Bible reading
+    if (!options.pitch) {
+      utterance.pitch = 0.95 // Slightly lower pitch sounds more natural
+    }
 
     // Estimate duration (rough calculation: ~150 words per minute at 1x speed)
     const wordCount = text.split(/\s+/).length

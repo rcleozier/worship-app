@@ -9,10 +9,10 @@
     "tags": ["beginner", "introduction", "foundation"],
     "tracks": [
       {
-        "id": "john-3-16",
+        "id": "john-3-16-21",
         "playlistId": "start-here",
         "title": "God's Love for You",
-        "reference": "John 3:16",
+        "reference": "John 3:16-21",
         "estimatedMinutes": 3,
         "verses": [
           {
@@ -20,6 +20,36 @@
             "chapter": 3,
             "verse": 16,
             "text": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
+          },
+          {
+            "book": "John",
+            "chapter": 3,
+            "verse": 17,
+            "text": "For God sent not his Son into the world to condemn the world; but that the world through him might be saved."
+          },
+          {
+            "book": "John",
+            "chapter": 3,
+            "verse": 18,
+            "text": "He that believeth on him is not condemned: but he that believeth not is condemned already, because he hath not believed in the name of the only begotten Son of God."
+          },
+          {
+            "book": "John",
+            "chapter": 3,
+            "verse": 19,
+            "text": "And this is the condemnation, that light is come into the world, and men loved darkness rather than light, because their deeds were evil."
+          },
+          {
+            "book": "John",
+            "chapter": 3,
+            "verse": 20,
+            "text": "For every one that doeth evil hateth the light, neither cometh to the light, lest his deeds should be reproved."
+          },
+          {
+            "book": "John",
+            "chapter": 3,
+            "verse": 21,
+            "text": "But he that doeth truth cometh to the light, that his deeds may be made manifest, that they are wrought in God."
           }
         ],
         "lesson": {
@@ -40,10 +70,10 @@
         }
       },
       {
-        "id": "jeremiah-29-11",
+        "id": "jeremiah-29-11-14",
         "playlistId": "start-here",
         "title": "God Has Plans for You",
-        "reference": "Jeremiah 29:11",
+        "reference": "Jeremiah 29:11-14",
         "estimatedMinutes": 3,
         "verses": [
           {
@@ -51,6 +81,24 @@
             "chapter": 29,
             "verse": 11,
             "text": "For I know the thoughts that I think toward you, saith the Lord, thoughts of peace, and not of evil, to give you an expected end."
+          },
+          {
+            "book": "Jeremiah",
+            "chapter": 29,
+            "verse": 12,
+            "text": "Then shall ye call upon me, and ye shall go and pray unto me, and I will hearken unto you."
+          },
+          {
+            "book": "Jeremiah",
+            "chapter": 29,
+            "verse": 13,
+            "text": "And ye shall seek me, and find me, when ye shall search for me with all your heart."
+          },
+          {
+            "book": "Jeremiah",
+            "chapter": 29,
+            "verse": 14,
+            "text": "And I will be found of you, saith the Lord: and I will turn away your captivity, and I will gather you from all the nations, and from all the places whither I have driven you, saith the Lord; and I will bring you again into the place whence I caused you to be carried away captive."
           }
         ],
         "lesson": {
@@ -71,12 +119,24 @@
         }
       },
       {
-        "id": "philippians-4-13",
+        "id": "philippians-4-11-13",
         "playlistId": "start-here",
         "title": "You Can Do All Things",
-        "reference": "Philippians 4:13",
+        "reference": "Philippians 4:11-13",
         "estimatedMinutes": 3,
         "verses": [
+          {
+            "book": "Philippians",
+            "chapter": 4,
+            "verse": 11,
+            "text": "Not that I speak in respect of want: for I have learned, in whatsoever state I am, therewith to be content."
+          },
+          {
+            "book": "Philippians",
+            "chapter": 4,
+            "verse": 12,
+            "text": "I know both how to be abased, and I know how to abound: every where and in all things I am instructed both to be full and to be hungry, both to abound and to suffer need."
+          },
           {
             "book": "Philippians",
             "chapter": 4,
@@ -139,17 +199,47 @@
         }
       },
       {
-        "id": "psalm-23-1",
+        "id": "psalm-23-1-6",
         "playlistId": "start-here",
         "title": "The Lord is My Shepherd",
-        "reference": "Psalm 23:1",
-        "estimatedMinutes": 3,
+        "reference": "Psalm 23:1-6",
+        "estimatedMinutes": 4,
         "verses": [
           {
             "book": "Psalm",
             "chapter": 23,
             "verse": 1,
             "text": "The Lord is my shepherd; I shall not want."
+          },
+          {
+            "book": "Psalm",
+            "chapter": 23,
+            "verse": 2,
+            "text": "He maketh me to lie down in green pastures: he leadeth me beside the still waters."
+          },
+          {
+            "book": "Psalm",
+            "chapter": 23,
+            "verse": 3,
+            "text": "He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake."
+          },
+          {
+            "book": "Psalm",
+            "chapter": 23,
+            "verse": 4,
+            "text": "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me."
+          },
+          {
+            "book": "Psalm",
+            "chapter": 23,
+            "verse": 5,
+            "text": "Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over."
+          },
+          {
+            "book": "Psalm",
+            "chapter": 23,
+            "verse": 6,
+            "text": "Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the Lord for ever."
           }
         ],
         "lesson": {
@@ -181,11 +271,11 @@
     "tags": ["peace", "comfort", "anxiety", "worry"],
     "tracks": [
       {
-        "id": "philippians-4-6-7",
+        "id": "philippians-4-6-9",
         "playlistId": "peace-and-comfort",
         "title": "Don't Worry, Pray Instead",
-        "reference": "Philippians 4:6-7",
-        "estimatedMinutes": 4,
+        "reference": "Philippians 4:6-9",
+        "estimatedMinutes": 3,
         "verses": [
           {
             "book": "Philippians",
@@ -198,6 +288,18 @@
             "chapter": 4,
             "verse": 7,
             "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus."
+          },
+          {
+            "book": "Philippians",
+            "chapter": 4,
+            "verse": 8,
+            "text": "Finally, brethren, whatsoever things are true, whatsoever things are honest, whatsoever things are just, whatsoever things are pure, whatsoever things are lovely, whatsoever things are of good report; if there be any virtue, and if there be any praise, think on these things."
+          },
+          {
+            "book": "Philippians",
+            "chapter": 4,
+            "verse": 9,
+            "text": "Those things, which ye have both learned, and received, and heard, and seen in me, do: and the God of peace shall be with you."
           }
         ],
         "lesson": {

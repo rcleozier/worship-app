@@ -77,9 +77,19 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     // When play is toggled or track changes
     if (state.isPlaying) {
       if (!isCurrentlySpeaking && !isCurrentlyPaused) {
-        // Start new TTS
+        // Start new TTS - read full passage with natural flow
         const verseTexts = currentTrack.verses.map(
-          (v) => `${v.book} ${v.chapter}, verse ${v.verse}. ${v.text}`
+          (v, idx, arr) => {
+            // For verse ranges, use "verses X to Y" format only at the start
+            if (arr.length > 1 && idx === 0) {
+              return `${v.book} ${v.chapter}, verses ${arr[0].verse} to ${arr[arr.length - 1].verse}. ${v.text}`
+            } else if (arr.length === 1) {
+              return `${v.book} ${v.chapter}, verse ${v.verse}. ${v.text}`
+            } else {
+              // For subsequent verses, just read the text naturally
+              return `Verse ${v.verse}. ${v.text}`
+            }
+          }
         )
         const fullText = `${currentTrack.reference}. ${verseTexts.join(" ")}`
 

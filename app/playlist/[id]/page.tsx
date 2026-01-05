@@ -15,6 +15,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { getPlaylistVisual } from "@/lib/playlist-visuals"
 
 export default function PlaylistPage() {
   const params = useParams()
@@ -68,14 +69,31 @@ export default function PlaylistPage() {
     )
   }
 
+  const visual = getPlaylistVisual(playlist.id, playlist.tags)
+
   return (
     <div className="flex flex-1 flex-col">
-      {/* Header with Gradient - Warmer, more inviting */}
+      {/* Header with Image and Gradient - Warmer, more inviting with visual identity */}
       <div
-        className={`h-80 bg-gradient-to-br ${playlist.coverGradient || "from-primary to-primary/50"} p-6 flex flex-col justify-end relative overflow-hidden`}
+        className="h-80 p-6 flex flex-col justify-end relative overflow-hidden"
+        style={{
+          backgroundImage: visual.imageUrl 
+            ? `url('${visual.imageUrl}')` 
+            : visual.bgImage,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
-        {/* Subtle texture overlay for warmth */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
+        {/* Gradient overlay for mood and text contrast */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${visual.gradient} opacity-80`} />
+        
+        {/* Subtle texture overlay for warmth and depth */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent" />
+        
+        {/* Decorative light element */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className={`w-96 h-96 rounded-full ${visual.overlay} blur-3xl opacity-25`} />
+        </div>
         <div className="relative max-w-4xl z-10">
           {/* Beginner badge with helpful tooltip */}
           <TooltipProvider>
