@@ -17,6 +17,44 @@ import {
 } from "@/components/ui/tooltip"
 import { getPlaylistVisual } from "@/lib/playlist-visuals"
 
+// Helper function to get beginner-friendly microcopy for playlists
+function getPlaylistMicrocopy(playlistId: string, tags: string[]): string {
+  // Check by ID first
+  const microcopyMap: Record<string, string> = {
+    "start-here": "Perfect for your very first time",
+    "peace-and-comfort": "For anxiety, stress, or hard days",
+    "love-and-relationships": "When you need connection and warmth",
+    "faith-and-trust": "When you feel uncertain or lost",
+    "gratitude-and-joy": "To reset your mindset and find light",
+    "strength-and-courage": "When you feel afraid or stuck",
+  }
+  
+  if (microcopyMap[playlistId]) {
+    return microcopyMap[playlistId]
+  }
+  
+  // Check by tags
+  for (const tag of tags) {
+    if (tag === "peace" || tag === "comfort") {
+      return "For anxiety, stress, or hard days"
+    }
+    if (tag === "love" || tag === "relationships") {
+      return "When you need connection and warmth"
+    }
+    if (tag === "faith" || tag === "trust") {
+      return "When you feel uncertain or lost"
+    }
+    if (tag === "gratitude" || tag === "joy") {
+      return "To reset your mindset and find light"
+    }
+    if (tag === "strength" || tag === "courage") {
+      return "When you feel afraid or stuck"
+    }
+  }
+  
+  return "Short lessons for everyday moments"
+}
+
 export default function LearnPage() {
   const [playlists, setPlaylists] = useState<Playlist[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -60,31 +98,34 @@ export default function LearnPage() {
   }
 
   return (
-    <div className="flex flex-1 flex-col gap-14 p-6 md:p-8 bg-gradient-to-b from-background via-background to-background/95">
-      {/* Hero Section - Enhanced with background image and better visual hierarchy */}
+    <div className="flex flex-1 flex-col gap-12 p-6 md:p-8 bg-gradient-to-b from-background via-background to-background/95">
+      {/* Hero Section - Enhanced with stronger gradient mask and better text prominence */}
       <div className="relative overflow-hidden rounded-3xl">
-        {/* Background image with overlay */}
+        {/* Background image with stronger overlay for text readability */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80&auto=format&fit=crop')",
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/90 to-background/85" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+          {/* Stronger gradient mask for better text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-br from-background/98 via-background/95 to-background/92" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+          {/* Additional subtle radial gradient for text area */}
+          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-background/20" />
         </div>
         
-        {/* Content */}
-        <div className="relative z-10 p-8 md:p-12">
+        {/* Content with tighter spacing and stronger text prominence */}
+        <div className="relative z-10 p-6 md:p-10">
           <div className="max-w-2xl">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-amber-200 via-orange-200 to-amber-200 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-6xl font-extrabold mb-3 bg-gradient-to-r from-amber-200 via-orange-200 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(251,191,36,0.3)]">
               Good morning
             </h1>
-            <p className="text-lg md:text-xl text-foreground/90 mb-3 font-medium">
+            <p className="text-lg md:text-xl text-foreground/95 mb-2 font-semibold">
               Ready to learn? Pick up where you left off or start something new.
             </p>
             {/* Reassurance sentence - plain language, non-preachy */}
-            <p className="text-base text-foreground/70">
+            <p className="text-base text-foreground/80">
               Take your time. There's no right or wrong way to begin.
             </p>
           </div>
@@ -93,11 +134,13 @@ export default function LearnPage() {
 
       {/* Continue Section - Enhanced with visual identity and accent */}
       {continuePlaylist && continueTrack && (
-        <section className="relative">
-          {/* Subtle background depth with calm blue tones */}
-          <div className="absolute -inset-4 bg-gradient-to-br from-blue-500/3 via-indigo-500/2 to-transparent rounded-2xl -z-10" />
+        <section className="relative pt-2">
+          {/* Subtle background depth with calm blue tones - stronger separation */}
+          <div className="absolute -inset-4 bg-gradient-to-br from-blue-500/4 via-indigo-500/3 to-transparent rounded-2xl -z-10" />
+          {/* Subtle top border for section separation */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
           <div className="relative">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-5">
               {/* Section header with calm blue accent */}
               <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-indigo-400 to-blue-400 bg-clip-text text-transparent">
                 Continue
@@ -107,9 +150,16 @@ export default function LearnPage() {
               </Button>
             </div>
             <Card 
-              className="group cursor-pointer hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 overflow-hidden border-0 shadow-md bg-card/50 backdrop-blur-sm"
+              className="group cursor-pointer hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 overflow-hidden border-0 shadow-md bg-card/50 backdrop-blur-sm focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:ring-offset-background"
               style={{ borderRadius: "1.25rem" }}
               onClick={() => player.playTrack(continueTrack.id, continuePlaylist.id)}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault()
+                  player.playTrack(continueTrack.id, continuePlaylist.id)
+                }
+              }}
             >
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
@@ -131,7 +181,11 @@ export default function LearnPage() {
                       </span>
                     </div>
                   </div>
-                  <Button size="icon" variant="default" className="shrink-0 shadow-md hover:shadow-lg transition-shadow">
+                  <Button 
+                    size="icon" 
+                    variant="default" 
+                    className="shrink-0 shadow-md hover:shadow-lg transition-shadow h-11 w-11"
+                  >
                     <Play className="h-5 w-5" />
                   </Button>
                 </div>
@@ -142,9 +196,11 @@ export default function LearnPage() {
       )}
 
       {/* Start Here Section - Featured with special treatment and warm accent */}
-      <section className="relative">
+      <section className="relative pt-4">
         {/* Enhanced background depth with warm glow for section separation */}
-        <div className="absolute -inset-6 bg-gradient-to-br from-amber-500/5 via-orange-500/3 to-rose-500/2 rounded-3xl -z-10 blur-sm" />
+        <div className="absolute -inset-6 bg-gradient-to-br from-amber-500/6 via-orange-500/4 to-rose-500/3 rounded-3xl -z-10 blur-sm" />
+        {/* Subtle top border for section separation */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/25 to-transparent" />
         <div className="relative">
           <div className="flex items-center gap-3 mb-6">
             {/* Section header with warm accent color */}
@@ -179,9 +235,11 @@ export default function LearnPage() {
       </section>
 
       {/* Made for Beginners - Visual separation with soft background and accent */}
-      <section className="relative pt-4">
+      <section className="relative pt-6">
         {/* Subtle background depth with calm green tones */}
-        <div className="absolute -inset-4 bg-gradient-to-br from-emerald-500/3 via-teal-500/2 to-transparent rounded-2xl -z-10" />
+        <div className="absolute -inset-4 bg-gradient-to-br from-emerald-500/4 via-teal-500/3 to-transparent rounded-2xl -z-10" />
+        {/* Subtle top border for section separation */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
         <div className="relative">
           {/* Section header with calm green accent */}
           <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">
@@ -205,9 +263,11 @@ export default function LearnPage() {
 
       {/* Recently Played - Enhanced with visual covers */}
       {recentlyPlayed.length > 0 && (
-        <section className="relative pt-4">
+        <section className="relative pt-6">
           {/* Subtle background depth */}
-          <div className="absolute -inset-4 bg-gradient-to-br from-slate-500/2 via-slate-600/1 to-transparent rounded-2xl -z-10" />
+          <div className="absolute -inset-4 bg-gradient-to-br from-slate-500/3 via-slate-600/2 to-transparent rounded-2xl -z-10" />
+          {/* Subtle top border for section separation */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-500/15 to-transparent" />
           <div className="relative">
             <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-slate-300 via-slate-200 to-slate-300 bg-clip-text text-transparent">
               Recently Played
@@ -218,9 +278,16 @@ export default function LearnPage() {
                 return (
                   <Card
                     key={idx}
-                    className="group cursor-pointer hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 border-0 shadow-md overflow-hidden"
+                    className="group cursor-pointer hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 border-0 shadow-md overflow-hidden focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:ring-offset-background"
                     style={{ borderRadius: "1rem" }}
                     onClick={() => item.track && item.playlist && player.playTrack(item.track.id, item.playlist.id)}
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if ((e.key === "Enter" || e.key === " ") && item.track && item.playlist) {
+                        e.preventDefault()
+                        player.playTrack(item.track.id, item.playlist.id)
+                      }
+                    }}
                   >
                     <CardContent className="p-4">
                       <div className="flex items-center gap-4">
@@ -250,7 +317,11 @@ export default function LearnPage() {
                             {item.playlist?.title} • {item.track?.reference}
                           </p>
                         </div>
-                        <Button size="icon" variant="ghost" className="shrink-0 hover:bg-primary/10">
+                        <Button 
+                          size="icon" 
+                          variant="ghost" 
+                          className="shrink-0 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 hover:bg-primary/10 transition-opacity"
+                        >
                           <Play className="h-4 w-4" />
                         </Button>
                       </div>
@@ -264,9 +335,11 @@ export default function LearnPage() {
       )}
 
       {/* Popular Playlists - Visual separation with accent */}
-      <section className="relative pt-4">
+      <section className="relative pt-6">
         {/* Subtle background depth with contemplative purple tones */}
-        <div className="absolute -inset-4 bg-gradient-to-br from-violet-500/3 via-purple-500/2 to-transparent rounded-2xl -z-10" />
+        <div className="absolute -inset-4 bg-gradient-to-br from-violet-500/4 via-purple-500/3 to-transparent rounded-2xl -z-10" />
+        {/* Subtle top border for section separation */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
         <div className="relative">
           {/* Section header with contemplative purple accent */}
           <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-violet-400 via-purple-400 to-violet-400 bg-clip-text text-transparent">
@@ -324,16 +397,23 @@ function PlaylistCard({
   
   return (
     <Card 
-      className={`group cursor-pointer transition-all duration-300 ${
+      className={`group cursor-pointer transition-all duration-300 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:ring-offset-background ${
         featured 
           ? "hover:shadow-2xl hover:shadow-amber-500/20 hover:-translate-y-1.5 border-0 shadow-lg shadow-amber-500/5" 
           : "hover:shadow-xl hover:-translate-y-0.5 border-0 shadow-md"
       } overflow-hidden bg-card/50 backdrop-blur-sm`}
       style={{
-        borderRadius: "1.25rem", // Increased for more warmth and softness
+        borderRadius: "1.25rem", // Standardized for consistency
         boxShadow: featured 
           ? "0 10px 40px -10px rgba(251, 191, 36, 0.15), 0 0 0 1px rgba(251, 191, 36, 0.1)" 
           : "0 4px 20px -4px rgba(0, 0, 0, 0.1)",
+      }}
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault()
+          onPlay(playlist)
+        }
       }}
     >
       <Link href={`/playlist/${playlist.id}`}>
@@ -348,11 +428,11 @@ function PlaylistCard({
             backgroundPosition: "center",
           }}
         >
-          {/* Gradient overlay for mood and text contrast - rich and warm */}
-          <div className={`absolute inset-0 bg-gradient-to-br ${visual.gradient} ${featured ? "opacity-75" : "opacity-80"}`} />
+          {/* Gradient overlay for mood and text contrast - rich and warm - improved for accessibility */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${visual.gradient} ${featured ? "opacity-80" : "opacity-85"}`} />
           
-          {/* Additional depth overlay for better text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+          {/* Additional depth overlay for better text contrast - stronger for accessibility */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
           
           {/* Decorative light element - larger and more prominent for featured */}
           <div className="absolute inset-0 flex items-center justify-center">
@@ -374,6 +454,10 @@ function PlaylistCard({
           <CardDescription className="line-clamp-2 mt-2 text-sm leading-relaxed">
             {playlist.description}
           </CardDescription>
+          {/* Beginner-friendly microcopy - subtle guidance */}
+          <p className="mt-2 text-xs text-muted-foreground/80 italic line-clamp-1">
+            {getPlaylistMicrocopy(playlist.id, playlist.tags)}
+          </p>
         </Link>
       </CardHeader>
       
@@ -412,18 +496,18 @@ function PlaylistCard({
           </div>
           <Button
             size="sm"
-            variant="default"
-            className={`h-9 w-9 rounded-full p-0 shadow-lg hover:shadow-xl transition-all ${
+            variant={featured ? "default" : "ghost"}
+            className={`h-9 w-9 rounded-full p-0 transition-all ${
               featured 
-                ? "bg-gradient-to-br from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 ring-2 ring-amber-500/30" 
-                : "bg-primary hover:bg-primary/90"
+                ? "bg-gradient-to-br from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 ring-2 ring-amber-500/30 shadow-lg hover:shadow-xl opacity-100" 
+                : "opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 bg-muted/80 hover:bg-primary/90 hover:scale-110"
             }`}
             onClick={(e) => {
               e.preventDefault()
               onPlay(playlist)
             }}
           >
-            <Play className="h-4 w-4 ml-0.5" />
+            <Play className={`h-4 w-4 ${featured ? "ml-0.5" : ""}`} />
           </Button>
         </div>
       </CardContent>

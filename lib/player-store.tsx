@@ -77,21 +77,20 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     // When play is toggled or track changes
     if (state.isPlaying) {
       if (!isCurrentlySpeaking && !isCurrentlyPaused) {
-        // Start new TTS - read full passage with natural flow
-        const verseTexts = currentTrack.verses.map(
-          (v, idx, arr) => {
-            // For verse ranges, use "verses X to Y" format only at the start
-            if (arr.length > 1 && idx === 0) {
-              return `${v.book} ${v.chapter}, verses ${arr[0].verse} to ${arr[arr.length - 1].verse}. ${v.text}`
-            } else if (arr.length === 1) {
-              return `${v.book} ${v.chapter}, verse ${v.verse}. ${v.text}`
-            } else {
-              // For subsequent verses, just read the text naturally
-              return `Verse ${v.verse}. ${v.text}`
-            }
-          }
-        )
-        const fullText = `${currentTrack.reference}. ${verseTexts.join(" ")}`
+        // Start new TTS - read naturally like a story
+        // Read reference once at the start, then flow verse text naturally without repetition
+        const referenceText = `${currentTrack.reference}.`
+        
+        // Join all verse texts naturally, removing extra periods and creating smooth flow
+        const verseTexts = currentTrack.verses
+          .map((v) => {
+            // Remove trailing periods from verse text to avoid double periods
+            return v.text.trim().replace(/\.$/, "")
+          })
+          .join(". ")
+        
+        // Combine reference and verses with natural flow - like reading a story
+        const fullText = `${referenceText} ${verseTexts}.`
 
         ttsService.speak(
           fullText,
@@ -160,11 +159,15 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       // Cancel and restart with new speed
       ttsService.cancel()
       
-      // Restart from beginning with new speed
-      const verseTexts = currentTrack.verses.map(
-        (v) => `${v.book} ${v.chapter}, verse ${v.verse}. ${v.text}`
-      )
-      const fullText = `${currentTrack.reference}. ${verseTexts.join(" ")}`
+      // Restart from beginning with new speed - natural story flow
+      const referenceText = `${currentTrack.reference}.`
+      const verseTexts = currentTrack.verses
+        .map((v) => {
+          // Remove trailing periods from verse text to avoid double periods
+          return v.text.trim().replace(/\.$/, "")
+        })
+        .join(". ")
+      const fullText = `${referenceText} ${verseTexts}.`
       
       ttsService.speak(
         fullText,

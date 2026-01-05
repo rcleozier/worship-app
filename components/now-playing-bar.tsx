@@ -25,6 +25,7 @@ import { usePlayer } from "@/lib/player-store"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { getPlaylistVisual } from "@/lib/playlist-visuals"
 
 export function NowPlayingBar() {
   const player = usePlayer()
@@ -90,11 +91,35 @@ export function NowPlayingBar() {
   const currentTime = player.currentTrack.estimatedMinutes * player.progress
   const totalTime = player.currentTrack.estimatedMinutes
 
+  // Get playlist visual for cover thumbnail
+  const playlistVisual = player.currentPlaylist 
+    ? getPlaylistVisual(player.currentPlaylist.id, player.currentPlaylist.tags)
+    : null
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-card">
+    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-card/95 backdrop-blur-sm">
+      {/* Accent line when playing - subtle glow */}
+      {player.isPlaying && (
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent opacity-60" />
+      )}
       <div className="flex h-20 items-center gap-4 px-4">
-        {/* Left: Track Info */}
+        {/* Left: Cover Thumbnail + Track Info */}
         <div className="flex min-w-0 flex-1 items-center gap-3">
+          {/* Cover thumbnail */}
+          {playlistVisual && (
+            <div
+              className="relative h-14 w-14 rounded-lg overflow-hidden shrink-0 shadow-md"
+              style={{
+                backgroundImage: playlistVisual.imageUrl 
+                  ? `url('${playlistVisual.imageUrl}')` 
+                  : playlistVisual.bgImage,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            >
+              <div className={`absolute inset-0 bg-gradient-to-br ${playlistVisual.gradient} opacity-85`} />
+            </div>
+          )}
           <div className="min-w-0 flex-1">
             <Link
               href={`/track/${player.currentTrackId}`}
@@ -127,13 +152,13 @@ export function NowPlayingBar() {
                   <Button
                     variant="default"
                     size="icon"
-                    className="h-10 w-10"
+                    className={`h-11 w-11 ${player.isPlaying ? "ring-2 ring-primary/30" : ""}`}
                     onClick={handlePlayClick}
                   >
                     {player.isPlaying ? (
                       <Pause className="h-5 w-5" />
                     ) : (
-                      <Play className="h-5 w-5" />
+                      <Play className="h-5 w-5 ml-0.5" />
                     )}
                   </Button>
                 </TooltipTrigger>
@@ -154,17 +179,17 @@ export function NowPlayingBar() {
             </Button>
           </div>
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <span>{formatTime(currentTime)}</span>
+            <span className="min-w-[2.5rem] text-right">{formatTime(currentTime)}</span>
             <div
-              className="h-1 w-32 cursor-pointer rounded-full bg-muted"
+              className="h-1.5 w-40 cursor-pointer rounded-full bg-muted/60 hover:bg-muted transition-colors"
               onClick={handleSeek}
             >
               <div
-                className="h-full rounded-full bg-primary transition-all"
+                className="h-full rounded-full bg-primary transition-all shadow-sm"
                 style={{ width: `${player.progress * 100}%` }}
               />
             </div>
-            <span>{formatTime(totalTime)}</span>
+            <span className="min-w-[2.5rem]">{formatTime(totalTime)}</span>
           </div>
         </div>
 
