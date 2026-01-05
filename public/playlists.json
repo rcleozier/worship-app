@@ -1,0 +1,911 @@
+[
+  {
+    "id": "start-here",
+    "title": "Start Here: Your First Steps",
+    "description": "Perfect for absolute beginners. Short, meaningful verses to get you started.",
+    "coverGradient": "from-blue-500 to-purple-600",
+    "difficulty": "Beginner",
+    "totalDuration": 25,
+    "tags": ["beginner", "introduction", "foundation"],
+    "tracks": [
+      {
+        "id": "john-3-16",
+        "playlistId": "start-here",
+        "title": "God's Love for You",
+        "reference": "John 3:16",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "John",
+            "chapter": 3,
+            "verse": 16,
+            "text": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
+          }
+        ],
+        "lesson": {
+          "summary": "This is one of the most famous verses in the Bible. It tells us that God loves everyone in the world so much that He sent His Son, Jesus, to save us. If we believe in Jesus, we can have eternal life with God.",
+          "keyIdea": "God's love is so great that He gave His Son so we can live forever with Him.",
+          "reflectionQuestion": "What does it mean to you that God loves the whole world, including you?",
+          "quiz": {
+            "question": "What did God give because He loved the world?",
+            "choices": [
+              "His only begotten Son",
+              "A beautiful garden",
+              "Ten commandments",
+              "A golden crown"
+            ],
+            "answerIndex": 0,
+            "explanation": "God gave His only Son, Jesus, because of His great love for us. This was the ultimate gift."
+          }
+        }
+      },
+      {
+        "id": "jeremiah-29-11",
+        "playlistId": "start-here",
+        "title": "God Has Plans for You",
+        "reference": "Jeremiah 29:11",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "Jeremiah",
+            "chapter": 29,
+            "verse": 11,
+            "text": "For I know the thoughts that I think toward you, saith the Lord, thoughts of peace, and not of evil, to give you an expected end."
+          }
+        ],
+        "lesson": {
+          "summary": "God is telling us that He has good plans for our future. He's not planning to harm us, but to give us hope and a good future. Even when life is hard, God is thinking about us with love.",
+          "keyIdea": "God has good plans for your future, filled with hope and peace.",
+          "reflectionQuestion": "How does it feel to know that God has good plans for your life?",
+          "quiz": {
+            "question": "What kind of thoughts does God have toward us?",
+            "choices": [
+              "Thoughts of peace and hope",
+              "Thoughts of punishment",
+              "Thoughts of worry",
+              "Thoughts of anger"
+            ],
+            "answerIndex": 0,
+            "explanation": "God's thoughts toward us are thoughts of peace, not evil. He wants good things for us."
+          }
+        }
+      },
+      {
+        "id": "philippians-4-13",
+        "playlistId": "start-here",
+        "title": "You Can Do All Things",
+        "reference": "Philippians 4:13",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "Philippians",
+            "chapter": 4,
+            "verse": 13,
+            "text": "I can do all things through Christ which strengtheneth me."
+          }
+        ],
+        "lesson": {
+          "summary": "This verse reminds us that we don't have to face life's challenges alone. With Jesus' help, we can handle anything that comes our way. It's not about our own strength, but about relying on God's power.",
+          "keyIdea": "With Jesus' strength, you can overcome any challenge.",
+          "reflectionQuestion": "What's one thing you're facing right now where you need God's strength?",
+          "quiz": {
+            "question": "Who gives us the strength to do all things?",
+            "choices": [
+              "Christ (Jesus)",
+              "Ourselves",
+              "Other people",
+              "Luck"
+            ],
+            "answerIndex": 0,
+            "explanation": "It's through Christ that we receive the strength we need. We don't have to rely on our own power alone."
+          }
+        }
+      },
+      {
+        "id": "proverbs-3-5-6",
+        "playlistId": "start-here",
+        "title": "Trust God's Direction",
+        "reference": "Proverbs 3:5-6",
+        "estimatedMinutes": 4,
+        "verses": [
+          {
+            "book": "Proverbs",
+            "chapter": 3,
+            "verse": 5,
+            "text": "Trust in the Lord with all thine heart; and lean not unto thine own understanding."
+          },
+          {
+            "book": "Proverbs",
+            "chapter": 3,
+            "verse": 6,
+            "text": "In all thy ways acknowledge him, and he shall direct thy paths."
+          }
+        ],
+        "lesson": {
+          "summary": "This passage teaches us to trust God completely, not just with our minds but with our whole heart. Instead of trying to figure everything out on our own, we should ask God for guidance. When we include God in all our decisions, He will show us the right path to take.",
+          "keyIdea": "Trust God completely, and He will guide your life in the right direction.",
+          "reflectionQuestion": "What's one area of your life where you need to trust God more instead of trying to control it yourself?",
+          "quiz": {
+            "question": "What should we NOT lean on according to this verse?",
+            "choices": [
+              "Our own understanding",
+              "God's wisdom",
+              "The Bible",
+              "Prayer"
+            ],
+            "answerIndex": 0,
+            "explanation": "We shouldn't lean on our own understanding. Instead, we should trust God's wisdom and guidance."
+          }
+        }
+      },
+      {
+        "id": "psalm-23-1",
+        "playlistId": "start-here",
+        "title": "The Lord is My Shepherd",
+        "reference": "Psalm 23:1",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "Psalm",
+            "chapter": 23,
+            "verse": 1,
+            "text": "The Lord is my shepherd; I shall not want."
+          }
+        ],
+        "lesson": {
+          "summary": "This verse uses the image of a shepherd caring for sheep. Just like a shepherd takes care of his sheep, making sure they have everything they need, God takes care of us. When we follow God, we won't lack anything important.",
+          "keyIdea": "God is like a caring shepherd who provides everything we need.",
+          "reflectionQuestion": "How does it make you feel to know that God is watching over you like a shepherd?",
+          "quiz": {
+            "question": "What does 'I shall not want' mean?",
+            "choices": [
+              "I won't lack what I need",
+              "I won't want anything",
+              "I won't desire God",
+              "I won't need a shepherd"
+            ],
+            "answerIndex": 0,
+            "explanation": "'I shall not want' means we won't lack what we truly need. God provides for us."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "peace-and-comfort",
+    "title": "Peace & Comfort",
+    "description": "Verses to bring calm and reassurance in difficult times",
+    "coverGradient": "from-green-500 to-teal-600",
+    "difficulty": "Beginner",
+    "totalDuration": 30,
+    "tags": ["peace", "comfort", "anxiety", "worry"],
+    "tracks": [
+      {
+        "id": "philippians-4-6-7",
+        "playlistId": "peace-and-comfort",
+        "title": "Don't Worry, Pray Instead",
+        "reference": "Philippians 4:6-7",
+        "estimatedMinutes": 4,
+        "verses": [
+          {
+            "book": "Philippians",
+            "chapter": 4,
+            "verse": 6,
+            "text": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God."
+          },
+          {
+            "book": "Philippians",
+            "chapter": 4,
+            "verse": 7,
+            "text": "And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus."
+          }
+        ],
+        "lesson": {
+          "summary": "Instead of worrying about our problems, we should pray to God and thank Him for what we have. When we do this, God gives us a peace that's hard to explain - a calm feeling that protects our hearts and minds.",
+          "keyIdea": "Replace worry with prayer, and God will give you peace that goes beyond understanding.",
+          "reflectionQuestion": "What's something you're worried about that you could bring to God in prayer instead?",
+          "quiz": {
+            "question": "What should we do instead of worrying?",
+            "choices": [
+              "Pray with thanksgiving",
+              "Ignore our problems",
+              "Worry more",
+              "Give up"
+            ],
+            "answerIndex": 0,
+            "explanation": "We should pray with thanksgiving instead of worrying. God wants to hear our concerns."
+          }
+        }
+      },
+      {
+        "id": "isaiah-41-10",
+        "playlistId": "peace-and-comfort",
+        "title": "Don't Be Afraid",
+        "reference": "Isaiah 41:10",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "Isaiah",
+            "chapter": 41,
+            "verse": 10,
+            "text": "Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness."
+          }
+        ],
+        "lesson": {
+          "summary": "God is telling us not to be afraid because He is always with us. He promises to give us strength, help us, and hold us up. We don't have to face our fears alone.",
+          "keyIdea": "God is with you, so you don't need to be afraid. He will strengthen and help you.",
+          "reflectionQuestion": "What fear or worry can you give to God today?",
+          "quiz": {
+            "question": "Why don't we need to be afraid?",
+            "choices": [
+              "God is with us and will help us",
+              "We're strong enough on our own",
+              "Nothing bad ever happens",
+              "Fear doesn't exist"
+            ],
+            "answerIndex": 0,
+            "explanation": "We don't need to fear because God is with us, and He promises to strengthen and help us."
+          }
+        }
+      },
+      {
+        "id": "matthew-11-28",
+        "playlistId": "peace-and-comfort",
+        "title": "Come to Me When You're Tired",
+        "reference": "Matthew 11:28",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "Matthew",
+            "chapter": 11,
+            "verse": 28,
+            "text": "Come unto me, all ye that labour and are heavy laden, and I will give you rest."
+          }
+        ],
+        "lesson": {
+          "summary": "Jesus invites everyone who is tired, stressed, or carrying heavy burdens to come to Him. He promises to give us rest - not just physical rest, but peace for our souls.",
+          "keyIdea": "When you're tired and burdened, Jesus offers you rest and peace.",
+          "reflectionQuestion": "What burden are you carrying that you could bring to Jesus?",
+          "quiz": {
+            "question": "Who does Jesus invite to come to Him?",
+            "choices": [
+              "Everyone who is tired and burdened",
+              "Only perfect people",
+              "Only religious leaders",
+              "Only those who have it all together"
+            ],
+            "answerIndex": 0,
+            "explanation": "Jesus invites everyone who is tired and carrying burdens. You don't need to be perfect to come to Him."
+          }
+        }
+      },
+      {
+        "id": "psalm-46-10",
+        "playlistId": "peace-and-comfort",
+        "title": "Be Still and Know",
+        "reference": "Psalm 46:10",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "Psalm",
+            "chapter": 46,
+            "verse": 10,
+            "text": "Be still, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth."
+          }
+        ],
+        "lesson": {
+          "summary": "Sometimes we need to stop, be quiet, and remember who God is. When we pause and recognize God's power and presence, we can find peace. God is in control, even when life feels chaotic.",
+          "keyIdea": "Take time to be still and remember that God is in control.",
+          "reflectionQuestion": "When was the last time you were truly still and quiet with God?",
+          "quiz": {
+            "question": "What should we do to know that God is God?",
+            "choices": [
+              "Be still",
+              "Keep busy",
+              "Worry more",
+              "Ignore God"
+            ],
+            "answerIndex": 0,
+            "explanation": "We need to be still - to pause and be quiet - so we can recognize who God is and find peace."
+          }
+        }
+      },
+      {
+        "id": "1-peter-5-7",
+        "playlistId": "peace-and-comfort",
+        "title": "Cast Your Cares on God",
+        "reference": "1 Peter 5:7",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "1 Peter",
+            "chapter": 5,
+            "verse": 7,
+            "text": "Casting all your care upon him; for he careth for you."
+          }
+        ],
+        "lesson": {
+          "summary": "We don't have to carry our worries and problems alone. God wants us to give Him all our cares and concerns because He truly cares about us. Like throwing a heavy backpack to someone who can carry it, we can give our worries to God.",
+          "keyIdea": "Give all your worries to God because He cares deeply about you.",
+          "reflectionQuestion": "What care or worry can you cast (give) to God today?",
+          "quiz": {
+            "question": "Why should we give our cares to God?",
+            "choices": [
+              "Because He cares for us",
+              "Because He doesn't care",
+              "Because we're weak",
+              "Because it's easy"
+            ],
+            "answerIndex": 0,
+            "explanation": "We can give our cares to God because He genuinely cares about us and wants to help."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "love-and-relationships",
+    "title": "Love & Relationships",
+    "description": "Understanding God's love and how to love others",
+    "coverGradient": "from-pink-500 to-rose-600",
+    "difficulty": "Beginner",
+    "totalDuration": 35,
+    "tags": ["love", "relationships", "family", "friendship"],
+    "tracks": [
+      {
+        "id": "1-corinthians-13-4-7",
+        "playlistId": "love-and-relationships",
+        "title": "What Love Really Is",
+        "reference": "1 Corinthians 13:4-7",
+        "estimatedMinutes": 5,
+        "verses": [
+          {
+            "book": "1 Corinthians",
+            "chapter": 13,
+            "verse": 4,
+            "text": "Charity suffereth long, and is kind; charity envieth not; charity vaunteth not itself, is not puffed up,"
+          },
+          {
+            "book": "1 Corinthians",
+            "chapter": 13,
+            "verse": 5,
+            "text": "Doth not behave itself unseemly, seeketh not her own, is not easily provoked, thinketh no evil;"
+          },
+          {
+            "book": "1 Corinthians",
+            "chapter": 13,
+            "verse": 6,
+            "text": "Rejoiceth not in iniquity, but rejoiceth in the truth;"
+          },
+          {
+            "book": "1 Corinthians",
+            "chapter": 13,
+            "verse": 7,
+            "text": "Beareth all things, believeth all things, hopeth all things, endureth all things."
+          }
+        ],
+        "lesson": {
+          "summary": "This famous passage describes what real love looks like. Love is patient and kind. It's not jealous, proud, or rude. Love doesn't keep track of wrongs. It always protects, trusts, hopes, and never gives up. This is how God loves us, and how we should love others.",
+          "keyIdea": "Real love is patient, kind, and never gives up - just like God's love for us.",
+          "reflectionQuestion": "How can you show this kind of love to someone in your life today?",
+          "quiz": {
+            "question": "According to this passage, what is love NOT?",
+            "choices": [
+              "Jealous or proud",
+              "Patient and kind",
+              "Protective and trusting",
+              "Hopeful and enduring"
+            ],
+            "answerIndex": 0,
+            "explanation": "Love is NOT jealous, proud, or rude. It IS patient, kind, protective, and never gives up."
+          }
+        }
+      },
+      {
+        "id": "1-john-4-19",
+        "playlistId": "love-and-relationships",
+        "title": "We Love Because God First Loved Us",
+        "reference": "1 John 4:19",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "1 John",
+            "chapter": 4,
+            "verse": 19,
+            "text": "We love him, because he first loved us."
+          }
+        ],
+        "lesson": {
+          "summary": "We are able to love God and others because God loved us first. His love is the source of all love. When we experience God's love, it changes us and helps us love others better.",
+          "keyIdea": "Our ability to love comes from experiencing God's love first.",
+          "reflectionQuestion": "How has God's love for you changed how you love others?",
+          "quiz": {
+            "question": "Why are we able to love?",
+            "choices": [
+              "Because God first loved us",
+              "Because we're naturally good",
+              "Because others love us",
+              "Because it's easy"
+            ],
+            "answerIndex": 0,
+            "explanation": "We can love because God loved us first. His love is the foundation for all our love."
+          }
+        }
+      },
+      {
+        "id": "ephesians-4-32",
+        "playlistId": "love-and-relationships",
+        "title": "Be Kind and Forgiving",
+        "reference": "Ephesians 4:32",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "Ephesians",
+            "chapter": 4,
+            "verse": 32,
+            "text": "And be ye kind one to another, tenderhearted, forgiving one another, even as God for Christ's sake hath forgiven you."
+          }
+        ],
+        "lesson": {
+          "summary": "We should be kind and forgiving to others, just like God has forgiven us through Jesus. When someone hurts us, we can choose to forgive them because God has forgiven us for our mistakes.",
+          "keyIdea": "Be kind and forgiving to others, just as God has forgiven you.",
+          "reflectionQuestion": "Is there someone you need to forgive? How can you show kindness to them?",
+          "quiz": {
+            "question": "How should we treat others?",
+            "choices": [
+              "With kindness and forgiveness",
+              "With anger and revenge",
+              "Only if they're nice to us",
+              "The same way they treat us"
+            ],
+            "answerIndex": 0,
+            "explanation": "We should be kind and forgiving, following God's example of how He forgave us."
+          }
+        }
+      },
+      {
+        "id": "proverbs-17-17",
+        "playlistId": "love-and-relationships",
+        "title": "A Friend Loves at All Times",
+        "reference": "Proverbs 17:17",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "Proverbs",
+            "chapter": 17,
+            "verse": 17,
+            "text": "A friend loveth at all times, and a brother is born for adversity."
+          }
+        ],
+        "lesson": {
+          "summary": "A true friend loves you not just when things are good, but all the time - even during hard times. Real friendship means being there for each other through both good and bad moments.",
+          "keyIdea": "True friends love you all the time, especially during difficult moments.",
+          "reflectionQuestion": "Who is a friend who has been there for you during hard times?",
+          "quiz": {
+            "question": "When does a friend love?",
+            "choices": [
+              "At all times",
+              "Only when it's easy",
+              "Only when you're happy",
+              "Only when you're successful"
+            ],
+            "answerIndex": 0,
+            "explanation": "A true friend loves at all times - in good times and bad times."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "faith-and-trust",
+    "title": "Faith & Trust",
+    "description": "Building your faith and learning to trust God",
+    "coverGradient": "from-amber-500 to-orange-600",
+    "difficulty": "Beginner",
+    "totalDuration": 32,
+    "tags": ["faith", "trust", "belief", "confidence"],
+    "tracks": [
+      {
+        "id": "hebrews-11-1",
+        "playlistId": "faith-and-trust",
+        "title": "What is Faith?",
+        "reference": "Hebrews 11:1",
+        "estimatedMinutes": 4,
+        "verses": [
+          {
+            "book": "Hebrews",
+            "chapter": 11,
+            "verse": 1,
+            "text": "Now faith is the substance of things hoped for, the evidence of things not seen."
+          }
+        ],
+        "lesson": {
+          "summary": "Faith is believing in something we hope for, even when we can't see it yet. It's like having confidence that something is real, even though we can't prove it with our eyes. Faith in God means trusting that He exists and that His promises are true.",
+          "keyIdea": "Faith is believing in what we hope for, even when we can't see it.",
+          "reflectionQuestion": "What is something you're hoping for that requires faith?",
+          "quiz": {
+            "question": "What is faith according to this verse?",
+            "choices": [
+              "Believing in things hoped for, even when unseen",
+              "Only believing what we can see",
+              "Being certain about everything",
+              "Not hoping for anything"
+            ],
+            "answerIndex": 0,
+            "explanation": "Faith is the confidence in things we hope for, even when we can't see them with our physical eyes."
+          }
+        }
+      },
+      {
+        "id": "mark-11-24",
+        "playlistId": "faith-and-trust",
+        "title": "Believe When You Pray",
+        "reference": "Mark 11:24",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "Mark",
+            "chapter": 11,
+            "verse": 24,
+            "text": "Therefore I say unto you, What things soever ye desire, when ye pray, believe that ye receive them, and ye shall have them."
+          }
+        ],
+        "lesson": {
+          "summary": "When we pray, we should believe that God hears us and will answer. This doesn't mean we'll always get exactly what we want, but it means we trust that God knows what's best and will respond to our prayers in the right way.",
+          "keyIdea": "When you pray, believe that God hears you and will answer according to His will.",
+          "reflectionQuestion": "Do you pray with faith, believing God will answer?",
+          "quiz": {
+            "question": "How should we pray according to this verse?",
+            "choices": [
+              "Believing we will receive",
+              "Without any expectation",
+              "Only for impossible things",
+              "Without faith"
+            ],
+            "answerIndex": 0,
+            "explanation": "We should pray believing that we will receive what we ask for, trusting God's timing and wisdom."
+          }
+        }
+      },
+      {
+        "id": "james-1-6",
+        "playlistId": "faith-and-trust",
+        "title": "Ask in Faith, Without Doubt",
+        "reference": "James 1:6",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "James",
+            "chapter": 1,
+            "verse": 6,
+            "text": "But let him ask in faith, nothing wavering. For he that wavereth is like a wave of the sea driven with the wind and tossed."
+          }
+        ],
+        "lesson": {
+          "summary": "When we ask God for something, we should ask with faith and not doubt. Doubt is like being a wave in the ocean, tossed around by the wind - unstable and unsure. But faith gives us stability and confidence.",
+          "keyIdea": "Ask God with faith, not doubt. Faith gives you stability.",
+          "reflectionQuestion": "Are there areas where you doubt instead of trusting God?",
+          "quiz": {
+            "question": "What happens when we waver or doubt?",
+            "choices": [
+              "We become unstable like a wave",
+              "We become stronger",
+              "We get what we want",
+              "Nothing happens"
+            ],
+            "answerIndex": 0,
+            "explanation": "When we doubt, we become unstable like a wave tossed by the wind. Faith gives us stability."
+          }
+        }
+      },
+      {
+        "id": "romans-10-17",
+        "playlistId": "faith-and-trust",
+        "title": "Faith Comes by Hearing",
+        "reference": "Romans 10:17",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "Romans",
+            "chapter": 10,
+            "verse": 17,
+            "text": "So then faith cometh by hearing, and hearing by the word of God."
+          }
+        ],
+        "lesson": {
+          "summary": "Our faith grows when we hear God's Word - the Bible. The more we read and listen to what God says, the stronger our faith becomes. This is why reading the Bible is so important for growing in faith.",
+          "keyIdea": "Faith grows when we hear and read God's Word.",
+          "reflectionQuestion": "How can you spend more time hearing God's Word to grow your faith?",
+          "quiz": {
+            "question": "How does faith come?",
+            "choices": [
+              "By hearing the Word of God",
+              "By trying harder",
+              "By being perfect",
+              "By ignoring God"
+            ],
+            "answerIndex": 0,
+            "explanation": "Faith comes by hearing, and hearing comes through the Word of God - the Bible."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "gratitude-and-joy",
+    "title": "Gratitude & Joy",
+    "description": "Verses about being thankful and finding joy",
+    "coverGradient": "from-yellow-500 to-amber-600",
+    "difficulty": "Beginner",
+    "totalDuration": 28,
+    "tags": ["gratitude", "thanksgiving", "joy", "happiness"],
+    "tracks": [
+      {
+        "id": "1-thessalonians-5-18",
+        "playlistId": "gratitude-and-joy",
+        "title": "Give Thanks in Everything",
+        "reference": "1 Thessalonians 5:18",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "1 Thessalonians",
+            "chapter": 5,
+            "verse": 18,
+            "text": "In every thing give thanks: for this is the will of God in Christ Jesus concerning you."
+          }
+        ],
+        "lesson": {
+          "summary": "God wants us to be thankful in all situations - not just when things are good, but even during hard times. This doesn't mean we're happy about bad things, but we can be thankful that God is with us and working in our lives.",
+          "keyIdea": "God wants us to give thanks in everything, trusting that He's working for our good.",
+          "reflectionQuestion": "What's one thing you can be thankful for today, even if life is hard?",
+          "quiz": {
+            "question": "When should we give thanks?",
+            "choices": [
+              "In everything",
+              "Only when things are good",
+              "Only on special days",
+              "Never"
+            ],
+            "answerIndex": 0,
+            "explanation": "We should give thanks in everything - in good times and hard times - because this is God's will for us."
+          }
+        }
+      },
+      {
+        "id": "philippians-4-4",
+        "playlistId": "gratitude-and-joy",
+        "title": "Rejoice Always",
+        "reference": "Philippians 4:4",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "Philippians",
+            "chapter": 4,
+            "verse": 4,
+            "text": "Rejoice in the Lord alway: and again I say, Rejoice."
+          }
+        ],
+        "lesson": {
+          "summary": "We're told to rejoice - to be joyful - in the Lord always. This doesn't mean we fake happiness, but we can find real joy in knowing God and being in relationship with Him, no matter what's happening around us.",
+          "keyIdea": "Find joy in the Lord always, because He is always with you.",
+          "reflectionQuestion": "What brings you joy when you think about God?",
+          "quiz": {
+            "question": "How often should we rejoice?",
+            "choices": [
+              "Always",
+              "Only on Sundays",
+              "Only when happy",
+              "Never"
+            ],
+            "answerIndex": 0,
+            "explanation": "We should rejoice in the Lord always - not just when things are going well, but always."
+          }
+        }
+      },
+      {
+        "id": "psalm-100-4",
+        "playlistId": "gratitude-and-joy",
+        "title": "Enter with Thanksgiving",
+        "reference": "Psalm 100:4",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "Psalm",
+            "chapter": 100,
+            "verse": 4,
+            "text": "Enter into his gates with thanksgiving, and into his courts with praise: be thankful unto him, and bless his name."
+          }
+        ],
+        "lesson": {
+          "summary": "When we come to God, we should come with a thankful heart and praise. Being grateful changes our perspective and helps us focus on God's goodness instead of our problems.",
+          "keyIdea": "Come to God with thanksgiving and praise, focusing on His goodness.",
+          "reflectionQuestion": "What are you thankful for that you can praise God for today?",
+          "quiz": {
+            "question": "How should we enter God's presence?",
+            "choices": [
+              "With thanksgiving and praise",
+              "With complaints",
+              "With demands",
+              "Without saying anything"
+            ],
+            "answerIndex": 0,
+            "explanation": "We should enter God's presence with thanksgiving and praise, recognizing His goodness."
+          }
+        }
+      },
+      {
+        "id": "james-1-2-3",
+        "playlistId": "gratitude-and-joy",
+        "title": "Joy in Trials",
+        "reference": "James 1:2-3",
+        "estimatedMinutes": 4,
+        "verses": [
+          {
+            "book": "James",
+            "chapter": 1,
+            "verse": 2,
+            "text": "My brethren, count it all joy when ye fall into divers temptations;"
+          },
+          {
+            "book": "James",
+            "chapter": 1,
+            "verse": 3,
+            "text": "Knowing this, that the trying of your faith worketh patience."
+          }
+        ],
+        "lesson": {
+          "summary": "This is a surprising verse - it says we can find joy even in difficult times! Why? Because hard times help us grow. They test our faith and teach us patience. When we go through challenges, we become stronger and more like Jesus.",
+          "keyIdea": "We can find joy in trials because they help us grow in faith and patience.",
+          "reflectionQuestion": "What's a difficult situation you're facing that might be helping you grow?",
+          "quiz": {
+            "question": "Why can we find joy in trials?",
+            "choices": [
+              "Because they help us grow in faith and patience",
+              "Because trials are fun",
+              "Because we like suffering",
+              "Because they're easy"
+            ],
+            "answerIndex": 0,
+            "explanation": "We can find joy in trials because they test our faith and help us develop patience and strength."
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "strength-and-courage",
+    "title": "Strength & Courage",
+    "description": "Finding strength and courage through God",
+    "coverGradient": "from-indigo-500 to-blue-600",
+    "difficulty": "Beginner",
+    "totalDuration": 30,
+    "tags": ["strength", "courage", "bravery", "power"],
+    "tracks": [
+      {
+        "id": "joshua-1-9",
+        "playlistId": "strength-and-courage",
+        "title": "Be Strong and Courageous",
+        "reference": "Joshua 1:9",
+        "estimatedMinutes": 4,
+        "verses": [
+          {
+            "book": "Joshua",
+            "chapter": 1,
+            "verse": 9,
+            "text": "Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the Lord thy God is with thee whithersoever thou goest."
+          }
+        ],
+        "lesson": {
+          "summary": "God is telling Joshua (and us) to be strong and brave, not afraid or discouraged. Why? Because God is with us wherever we go. We don't have to face challenges alone - God is right there with us, giving us strength.",
+          "keyIdea": "Be strong and courageous because God is with you wherever you go.",
+          "reflectionQuestion": "What challenge are you facing where you need God's strength and courage?",
+          "quiz": {
+            "question": "Why can we be strong and courageous?",
+            "choices": [
+              "Because God is with us wherever we go",
+              "Because we're naturally brave",
+              "Because nothing bad happens",
+              "Because we're alone"
+            ],
+            "answerIndex": 0,
+            "explanation": "We can be strong and courageous because the Lord our God is with us wherever we go."
+          }
+        }
+      },
+      {
+        "id": "isaiah-40-31",
+        "playlistId": "strength-and-courage",
+        "title": "They That Wait on the Lord",
+        "reference": "Isaiah 40:31",
+        "estimatedMinutes": 4,
+        "verses": [
+          {
+            "book": "Isaiah",
+            "chapter": 40,
+            "verse": 31,
+            "text": "But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint."
+          }
+        ],
+        "lesson": {
+          "summary": "When we wait on God - trusting Him and relying on Him - He renews our strength. We won't get tired or give up. It's like an eagle that soars high in the sky, powered by the wind. God gives us that kind of strength.",
+          "keyIdea": "Wait on the Lord, and He will renew your strength so you won't grow weary.",
+          "reflectionQuestion": "How can you wait on God and trust Him to renew your strength?",
+          "quiz": {
+            "question": "What happens when we wait on the Lord?",
+            "choices": [
+              "Our strength is renewed",
+              "We get weaker",
+              "Nothing happens",
+              "We become tired"
+            ],
+            "answerIndex": 0,
+            "explanation": "When we wait on the Lord, He renews our strength. We won't grow weary or faint."
+          }
+        }
+      },
+      {
+        "id": "2-timothy-1-7",
+        "playlistId": "strength-and-courage",
+        "title": "God Gave Us Power",
+        "reference": "2 Timothy 1:7",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "2 Timothy",
+            "chapter": 1,
+            "verse": 7,
+            "text": "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind."
+          }
+        ],
+        "lesson": {
+          "summary": "God didn't give us a spirit of fear. Instead, He gave us power, love, and self-control. When we feel afraid, we can remember that fear doesn't come from God - power, love, and a sound mind do.",
+          "keyIdea": "God gives us power, love, and self-control - not fear.",
+          "reflectionQuestion": "What fear can you replace with God's power and love today?",
+          "quiz": {
+            "question": "What did God give us?",
+            "choices": [
+              "Power, love, and a sound mind",
+              "Fear and worry",
+              "Doubt and confusion",
+              "Nothing"
+            ],
+            "answerIndex": 0,
+            "explanation": "God gave us power, love, and a sound mind - not fear. Fear doesn't come from God."
+          }
+        }
+      },
+      {
+        "id": "ephesians-6-10",
+        "playlistId": "strength-and-courage",
+        "title": "Be Strong in the Lord",
+        "reference": "Ephesians 6:10",
+        "estimatedMinutes": 3,
+        "verses": [
+          {
+            "book": "Ephesians",
+            "chapter": 6,
+            "verse": 10,
+            "text": "Finally, my brethren, be strong in the Lord, and in the power of his might."
+          }
+        ],
+        "lesson": {
+          "summary": "Our strength doesn't come from ourselves - it comes from the Lord and His mighty power. When we feel weak, we can draw strength from God's power, not our own.",
+          "keyIdea": "Be strong by relying on the Lord's power, not your own strength.",
+          "reflectionQuestion": "How can you rely on God's power instead of trying to be strong on your own?",
+          "quiz": {
+            "question": "Where should our strength come from?",
+            "choices": [
+              "From the Lord and His power",
+              "From ourselves only",
+              "From other people",
+              "From luck"
+            ],
+            "answerIndex": 0,
+            "explanation": "Our strength should come from the Lord and the power of His might, not from ourselves."
+          }
+        }
+      }
+    ]
+  }
+]
+
