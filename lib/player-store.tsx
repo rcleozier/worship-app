@@ -41,6 +41,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
 
   const [playlists, setPlaylists] = useState<Playlist[]>([])
   const ttsProgressRef = useRef<number>(0)
+  const seekStartProgressRef = useRef<number>(0) // Track where we started seeking from
 
   // Load playlists
   useEffect(() => {
@@ -56,6 +57,46 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     .find((t) => t.id === state.currentTrackId) || null
 
   const currentPlaylist = playlists.find((p) => p.id === state.currentPlaylistId) || null
+
+  // Helper function to build full text for a track
+  const buildTrackText = useCallback((track: Track): string => {
+    const referenceText = `${track.reference}.`
+    const verseTexts = track.verses
+      .map((v) => v.text.trim().replace(/\.$/, ""))
+      .join(". ")
+    
+    // Build explanation text from lesson content
+    let explanationText = ""
+    if (track.lesson) {
+      const parts: string[] = []
+      
+      // Add life situation if available
+      if (track.lesson.lifeSituation) {
+        parts.push(`This shows up in real life when ${track.lesson.lifeSituation.toLowerCase()}.`)
+      }
+      
+      // Add summary/explanation
+      if (track.lesson.summary) {
+        parts.push(track.lesson.summary)
+      }
+      
+      // Add key idea
+      if (track.lesson.keyIdea) {
+        parts.push(`The key idea is: ${track.lesson.keyIdea}`)
+      }
+      
+      // Add behavioral takeaway if available
+      if (track.lesson.behavioralTakeaway) {
+        parts.push(`Here's something to try: ${track.lesson.behavioralTakeaway}`)
+      }
+      
+      if (parts.length > 0) {
+        explanationText = ` Here's what this means for you. ${parts.join(" ")}`
+      }
+    }
+    
+    return `${referenceText} ${verseTexts}.${explanationText}`
+  }, [])
 
   // Persist state
   useEffect(() => {
@@ -77,20 +118,10 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     // When play is toggled or track changes
     if (state.isPlaying) {
       if (!isCurrentlySpeaking && !isCurrentlyPaused) {
-        // Start new TTS - read naturally like a story
-        // Read reference once at the start, then flow verse text naturally without repetition
-        const referenceText = `${currentTrack.reference}.`
-        
-        // Join all verse texts naturally, removing extra periods and creating smooth flow
-        const verseTexts = currentTrack.verses
-          .map((v) => {
-            // Remove trailing periods from verse text to avoid double periods
-            return v.text.trim().replace(/\.$/, "")
-          })
-          .join(". ")
-        
-        // Combine reference and verses with natural flow - like reading a story
-        const fullText = `${referenceText} ${verseTexts}.`
+        // Start new TTS - read verse and explanation
+        // Reset seek start position when starting fresh
+        seekStartProgressRef.current = 0
+        const fullText = buildTrackText(currentTrack)
 
         ttsService.speak(
           fullText,
@@ -159,15 +190,9 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       // Cancel and restart with new speed
       ttsService.cancel()
       
-      // Restart from beginning with new speed - natural story flow
-      const referenceText = `${currentTrack.reference}.`
-      const verseTexts = currentTrack.verses
-        .map((v) => {
-          // Remove trailing periods from verse text to avoid double periods
-          return v.text.trim().replace(/\.$/, "")
-        })
-        .join(". ")
-      const fullText = `${referenceText} ${verseTexts}.`
+      // Restart from beginning with new speed - include verse and explanation
+      seekStartProgressRef.current = 0
+      const fullText = buildTrackText(currentTrack)
       
       ttsService.speak(
         fullText,
@@ -277,15 +302,29 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       }
       return prev
     })
-  }, [playlists])
+  }, [playlists, buildTrackText])
+
+  // Helper function to skip to a specific position in text
+  const skipToPosition = useCallback((text: string, progress: number): string => {
+    if (progress <= 0) return text
+    if (progress >= 1) return ""
+    
+    const words = text.split(/\s+/)
+    const totalWords = words.length
+    const wordsToSkip = Math.floor(totalWords * progress)
+    
+    if (wordsToSkip >= totalWords) return ""
+    
+    // Return remaining text, optionally add a brief context
+    const remainingWords = words.slice(wordsToSkip)
+    return remainingWords.join(" ")
+  }, [])
 
   const seek = useCallback((progress: number) => {
     const newProgress = Math.max(0, Math.min(1, progress))
     setState((prev) => {
       const wasPlaying = prev.isPlaying
-      // Cancel and restart TTS if playing
-      // Note: Web Speech API doesn't support seeking, so we restart from beginning
-      // In a real implementation, you'd need to skip text or use a different audio solution
+      // Cancel and restart TTS if playing, skipping to the requested position
       if (wasPlaying && prev.currentTrackId) {
         const track = playlists
           .flatMap((p) => p.tracks)
@@ -293,62 +332,75 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         
         if (track) {
           ttsService.cancel()
-          // Restart from beginning - TTS doesn't support seeking to specific positions
-          // The progress will update naturally as it plays
-          setTimeout(() => {
-            const referenceText = `${track.reference}.`
-            const verseTexts = track.verses
-              .map((v) => v.text.trim().replace(/\.$/, ""))
-              .join(". ")
-            const fullText = `${referenceText} ${verseTexts}.`
-            
-            ttsService.speak(
-              fullText,
-              {
-                rate: prev.playbackSpeed,
-                pitch: 1,
-                volume: 1,
-              },
-              {
-                onProgress: (progress) => {
-                  ttsProgressRef.current = progress
-                  setState((p) => ({ ...p, progress }))
+          
+          // Build full text
+          const fullText = buildTrackText(track)
+          
+          // Skip to the requested position
+          const textToRead = skipToPosition(fullText, newProgress)
+          
+          // Store the seek start position for progress calculation
+          seekStartProgressRef.current = newProgress
+          
+          // Only play if there's remaining text
+          if (textToRead.trim()) {
+            setTimeout(() => {
+              ttsService.speak(
+                textToRead,
+                {
+                  rate: prev.playbackSpeed,
+                  pitch: 1,
+                  volume: 1,
                 },
-                onComplete: () => {
-                  // Auto-advance logic (same as before)
-                  setState((p) => {
-                    const playlist = playlists.find((pl) => pl.id === p.currentPlaylistId)
-                    if (playlist) {
-                      const currentIndex = playlist.tracks.findIndex((t) => t.id === p.currentTrackId)
-                      if (currentIndex < playlist.tracks.length - 1) {
-                        const nextTrack = playlist.tracks[currentIndex + 1]
-                        return {
-                          ...p,
-                          currentTrackId: nextTrack.id,
-                          progress: 0,
-                          isPlaying: true,
-                          history: [
-                            ...p.history,
-                            {
-                              trackId: p.currentTrackId!,
-                              playlistId: p.currentPlaylistId!,
-                              playedAt: new Date().toISOString(),
-                            },
-                          ],
+                {
+                  onProgress: (localProgress) => {
+                    // Calculate actual progress: start position + (local progress * remaining portion)
+                    const remainingPortion = 1 - seekStartProgressRef.current
+                    const actualProgress = seekStartProgressRef.current + (localProgress * remainingPortion)
+                    ttsProgressRef.current = actualProgress
+                    setState((p) => ({ ...p, progress: actualProgress }))
+                  },
+                  onComplete: () => {
+                    // Auto-advance logic
+                    setState((p) => {
+                      const playlist = playlists.find((pl) => pl.id === p.currentPlaylistId)
+                      if (playlist) {
+                        const currentIndex = playlist.tracks.findIndex((t) => t.id === p.currentTrackId)
+                        if (currentIndex < playlist.tracks.length - 1) {
+                          const nextTrack = playlist.tracks[currentIndex + 1]
+                          return {
+                            ...p,
+                            currentTrackId: nextTrack.id,
+                            progress: 0,
+                            isPlaying: true,
+                            history: [
+                              ...p.history,
+                              {
+                                trackId: p.currentTrackId!,
+                                playlistId: p.currentPlaylistId!,
+                                playedAt: new Date().toISOString(),
+                              },
+                            ],
+                          }
                         }
                       }
-                    }
-                    return { ...p, isPlaying: false, progress: 1 }
-                  })
-                },
-              }
-            )
-          }, 50)
+                      return { ...p, isPlaying: false, progress: 1 }
+                    })
+                    seekStartProgressRef.current = 0
+                  },
+                }
+              )
+            }, 50)
+          } else {
+            // If we've skipped to the end, just mark as complete
+            setState((p) => ({ ...p, progress: 1, isPlaying: false }))
+            seekStartProgressRef.current = 0
+          }
         }
       }
       return { ...prev, progress: newProgress }
     })
-  }, [playlists])
+  }, [playlists, buildTrackText, skipToPosition])
 
   const setPlaybackSpeed = useCallback((speed: number) => {
     setState((prev) => ({ ...prev, playbackSpeed: speed }))

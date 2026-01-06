@@ -32,6 +32,7 @@ export function NowPlayingBar() {
   const router = useRouter()
   const [isBookmarked, setIsBookmarked] = useState(false)
   const [hasSeenPlayTooltip, setHasSeenPlayTooltip] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
 
   useEffect(() => {
     if (player.currentTrackId && typeof window !== "undefined") {
@@ -43,6 +44,33 @@ export function NowPlayingBar() {
       setHasSeenPlayTooltip(seen === "true")
     }
   }, [player.currentTrackId])
+
+  // Handle mouse move and up globally when dragging
+  useEffect(() => {
+    if (isDragging) {
+      const handleGlobalMouseMove = (e: MouseEvent) => {
+        const progressBar = document.querySelector('[data-progress-bar]') as HTMLElement
+        if (progressBar) {
+          const rect = progressBar.getBoundingClientRect()
+          const x = e.clientX - rect.left
+          const progress = Math.max(0, Math.min(1, x / rect.width))
+          player.seek(progress)
+        }
+      }
+
+      const handleGlobalMouseUp = () => {
+        setIsDragging(false)
+      }
+
+      window.addEventListener('mousemove', handleGlobalMouseMove)
+      window.addEventListener('mouseup', handleGlobalMouseUp)
+
+      return () => {
+        window.removeEventListener('mousemove', handleGlobalMouseMove)
+        window.removeEventListener('mouseup', handleGlobalMouseUp)
+      }
+    }
+  }, [isDragging, player])
   
   const handlePlayClick = () => {
     player.togglePlay()
@@ -51,10 +79,6 @@ export function NowPlayingBar() {
       localStorage.setItem("bible_play_tooltip_seen", "true")
       setHasSeenPlayTooltip(true)
     }
-  }
-
-  if (!player.currentTrack) {
-    return null
   }
 
   const handleBookmark = () => {
@@ -77,8 +101,27 @@ export function NowPlayingBar() {
   const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
     const x = e.clientX - rect.left
-    const progress = x / rect.width
+    const progress = Math.max(0, Math.min(1, x / rect.width))
     player.seek(progress)
+  }
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    setIsDragging(true)
+    handleSeek(e)
+  }
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isDragging) {
+      handleSeek(e)
+    }
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
+  if (!player.currentTrack) {
+    return null
   }
 
   const formatTime = (minutes: number) => {
@@ -181,7 +224,11 @@ export function NowPlayingBar() {
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <span className="min-w-[2.5rem] text-right">{formatTime(currentTime)}</span>
             <div
-              className="h-1.5 w-40 cursor-pointer rounded-full bg-muted/60 hover:bg-muted transition-colors"
+              data-progress-bar
+              className="h-1.5 w-40 cursor-pointer rounded-full bg-muted/60 hover:bg-muted transition-colors select-none"
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
               onClick={handleSeek}
             >
               <div

@@ -5,7 +5,13 @@
 
 export function calculateReadingDuration(
   verses: Array<{ text: string }>,
-  lesson?: { summary?: string; keyIdea?: string; reflectionQuestion?: string }
+  lesson?: { 
+    summary?: string
+    keyIdea?: string
+    reflectionQuestion?: string
+    lifeSituation?: string
+    behavioralTakeaway?: string
+  }
 ): number {
   // Average reading speed: ~150 words per minute for comfortable reading
   // TTS speed: ~150-180 words per minute depending on voice
@@ -17,18 +23,36 @@ export function calculateReadingDuration(
     totalWords += verse.text.split(/\s+/).length
   })
   
-  // Add lesson content if provided (for context, not always read aloud)
+  // Add lesson content - now fully read aloud, so full weight
   if (lesson) {
-    if (lesson.summary) {
-      totalWords += lesson.summary.split(/\s+/).length * 0.3 // 30% weight (optional reading)
+    // Life situation intro text: "This shows up in real life when..." = ~8 words
+    if (lesson.lifeSituation) {
+      totalWords += 8 + lesson.lifeSituation.split(/\s+/).length
     }
+    
+    // Transition text: "Here's what this means for you." = ~6 words
+    if (lesson.summary || lesson.keyIdea || lesson.behavioralTakeaway) {
+      totalWords += 6
+    }
+    
+    // Summary is fully read
+    if (lesson.summary) {
+      totalWords += lesson.summary.split(/\s+/).length
+    }
+    
+    // Key idea intro: "The key idea is:" = ~4 words
     if (lesson.keyIdea) {
-      totalWords += lesson.keyIdea.split(/\s+/).length * 0.2 // 20% weight
+      totalWords += 4 + lesson.keyIdea.split(/\s+/).length
+    }
+    
+    // Behavioral takeaway intro: "Here's something to try:" = ~5 words
+    if (lesson.behavioralTakeaway) {
+      totalWords += 5 + lesson.behavioralTakeaway.split(/\s+/).length
     }
   }
   
-  // Add reference reading (e.g., "John chapter 3, verse 16" = ~5 words)
-  totalWords += 5
+  // Add reference reading (e.g., "John 3:16." = ~3 words)
+  totalWords += 3
   
   // Calculate minutes: words / wordsPerMinute
   // Use 140 WPM for TTS (slightly slower than reading)
