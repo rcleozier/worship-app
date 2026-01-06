@@ -26,8 +26,10 @@ export interface Quiz {
 }
 
 export interface Lesson {
+  lifeSituation?: string // "When does this show up in real life?"
   summary: string
   keyIdea: string
+  behavioralTakeaway?: string // "Because this is true → do this differently today"
   reflectionQuestion: string
   quiz?: Quiz
 }
@@ -52,6 +54,7 @@ export interface Playlist {
   totalDuration: number
   tags: string[]
   tracks: Track[]
+  wrapUp?: string // End-of-playlist integration message
 }
 
 export interface PlayerState {

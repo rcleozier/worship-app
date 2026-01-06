@@ -7,6 +7,7 @@
     "difficulty": "Beginner",
     "totalDuration": 25,
     "tags": ["beginner", "introduction", "foundation"],
+    "wrapUp": "These verses share a theme: you don't have to earn your way into God's care, and you don't have to figure everything out alone. Notice how often the idea of 'not doing it alone' shows up—in love, plans, strength, direction, and provision. As you go through your week, pay attention to moments when you feel the weight of trying to handle everything yourself. That's when these truths become real tools, not just nice words.",
     "tracks": [
       {
         "id": "john-3-16",
@@ -23,9 +24,11 @@
           }
         ],
         "lesson": {
-          "summary": "This is one of the most famous verses in the Bible. It tells us that God loves everyone in the world so much that He sent His Son, Jesus, to save us. If we believe in Jesus, we can have eternal life with God.",
-          "keyIdea": "God's love is so great that He gave His Son so we can live forever with Him.",
-          "reflectionQuestion": "What does it mean to you that God loves the whole world, including you?",
+          "lifeSituation": "When you feel unworthy, behind, or unsure if you matter",
+          "summary": "This verse says God's love isn't conditional or earned—it's already there, for everyone. God showed this by sending Jesus, not because we did anything right, but because love is who God is. This means your worth doesn't depend on what you've done or where you've been.",
+          "keyIdea": "You are loved completely, not because of what you do, but because of who God is.",
+          "behavioralTakeaway": "Because you're loved without earning it, stop replaying your mistakes tonight. Instead, notice one moment today when you felt genuinely cared for.",
+          "reflectionQuestion": "Notice this: When did you last feel truly accepted, without having to prove yourself?",
           "quiz": {
             "question": "What did God give because He loved the world?",
             "choices": [
@@ -54,9 +57,11 @@
           }
         ],
         "lesson": {
-          "summary": "God is telling us that He has good plans for our future. He's not planning to harm us, but to give us hope and a good future. Even when life is hard, God is thinking about us with love.",
-          "keyIdea": "God has good plans for your future, filled with hope and peace.",
-          "reflectionQuestion": "How does it feel to know that God has good plans for your life?",
+          "lifeSituation": "When you feel uncertain about the future or stuck in a difficult season",
+          "summary": "God isn't planning to harm you or leave you stranded. Even when your current situation feels messy, God is thinking about you with intention—not random chance, but purposeful care. Your future isn't a blank page God forgot to write; it's something God is actively shaping for your good.",
+          "keyIdea": "God's thoughts toward you are thoughts of peace and purpose, not punishment or abandonment.",
+          "behavioralTakeaway": "Because God's direction unfolds step by step, focus only on the next right action today instead of trying to map out the entire year.",
+          "reflectionQuestion": "Try this today: When worry about tomorrow shows up, pause and name one small thing you can trust God with right now.",
           "quiz": {
             "question": "What kind of thoughts does God have toward us?",
             "choices": [
@@ -85,9 +90,11 @@
           }
         ],
         "lesson": {
-          "summary": "This verse reminds us that we don't have to face life's challenges alone. With Jesus' help, we can handle anything that comes our way. It's not about our own strength, but about relying on God's power.",
-          "keyIdea": "With Jesus' strength, you can overcome any challenge.",
-          "reflectionQuestion": "What's one thing you're facing right now where you need God's strength?",
+          "lifeSituation": "When you're overwhelmed, facing something bigger than you, or feel like you're running on empty",
+          "summary": "This isn't about mustering up more willpower or pretending you're fine. It's about recognizing that you don't have to carry everything alone. When you're tapped out, there's a source of strength available that isn't dependent on your energy levels or your ability to figure it all out.",
+          "keyIdea": "You don't have to rely on your own strength alone—there's help available when you need it.",
+          "behavioralTakeaway": "Because strength comes from beyond yourself, when you hit a wall today, pause and ask for help instead of pushing harder.",
+          "reflectionQuestion": "Carry this thought: What's one thing you've been trying to handle alone that you could invite help with?",
           "quiz": {
             "question": "Who gives us the strength to do all things?",
             "choices": [
@@ -122,9 +129,11 @@
           }
         ],
         "lesson": {
-          "summary": "This passage teaches us to trust God completely, not just with our minds but with our whole heart. Instead of trying to figure everything out on our own, we should ask God for guidance. When we include God in all our decisions, He will show us the right path to take.",
-          "keyIdea": "Trust God completely, and He will guide your life in the right direction.",
-          "reflectionQuestion": "What's one area of your life where you need to trust God more instead of trying to control it yourself?",
+          "lifeSituation": "When you're trying to control everything, overthinking decisions, or feeling paralyzed by too many options",
+          "summary": "This isn't about shutting off your brain or ignoring your intuition. It's about recognizing that your understanding is limited—you can't see the full picture. When you acknowledge that and invite God into your decision-making, you're not giving up control; you're making room for guidance that sees beyond what you can.",
+          "keyIdea": "You don't have to figure everything out alone. Include God in your decisions, and direction will become clearer.",
+          "behavioralTakeaway": "Because God's guidance shows up in the process, make one decision today by pausing to ask for direction instead of rushing ahead.",
+          "reflectionQuestion": "Notice this: What's one decision you've been overthinking that you could bring to God today?",
           "quiz": {
             "question": "What should we NOT lean on according to this verse?",
             "choices": [
@@ -153,9 +162,11 @@
           }
         ],
         "lesson": {
-          "summary": "This verse uses the image of a shepherd caring for sheep. Just like a shepherd takes care of his sheep, making sure they have everything they need, God takes care of us. When we follow God, we won't lack anything important.",
-          "keyIdea": "God is like a caring shepherd who provides everything we need.",
-          "reflectionQuestion": "How does it make you feel to know that God is watching over you like a shepherd?",
+          "lifeSituation": "When you're worried about having enough, comparing yourself to others, or feeling like you're missing something",
+          "summary": "A shepherd doesn't wait for the sheep to earn their care—they provide because that's their role. This verse says God is like that: actively watching over you, making sure you have what you need. It's not about having everything you want, but about having what you truly need when you need it.",
+          "keyIdea": "God is actively providing for your needs, not because you earned it, but because that's who God is.",
+          "behavioralTakeaway": "Because God provides what you need, pause tonight and name one thing you already have that you're grateful for, instead of focusing on what's missing.",
+          "reflectionQuestion": "Try this today: Notice one way you already have what you need right now, even if it's not everything you want.",
           "quiz": {
             "question": "What does 'I shall not want' mean?",
             "choices": [

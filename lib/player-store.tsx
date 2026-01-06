@@ -284,13 +284,71 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     setState((prev) => {
       const wasPlaying = prev.isPlaying
       // Cancel and restart TTS if playing
+      // Note: Web Speech API doesn't support seeking, so we restart from beginning
+      // In a real implementation, you'd need to skip text or use a different audio solution
       if (wasPlaying && prev.currentTrackId) {
-        ttsService.cancel()
-        // TTS will restart automatically via the useEffect with new progress
+        const track = playlists
+          .flatMap((p) => p.tracks)
+          .find((t) => t.id === prev.currentTrackId)
+        
+        if (track) {
+          ttsService.cancel()
+          // Restart from beginning - TTS doesn't support seeking to specific positions
+          // The progress will update naturally as it plays
+          setTimeout(() => {
+            const referenceText = `${track.reference}.`
+            const verseTexts = track.verses
+              .map((v) => v.text.trim().replace(/\.$/, ""))
+              .join(". ")
+            const fullText = `${referenceText} ${verseTexts}.`
+            
+            ttsService.speak(
+              fullText,
+              {
+                rate: prev.playbackSpeed,
+                pitch: 1,
+                volume: 1,
+              },
+              {
+                onProgress: (progress) => {
+                  ttsProgressRef.current = progress
+                  setState((p) => ({ ...p, progress }))
+                },
+                onComplete: () => {
+                  // Auto-advance logic (same as before)
+                  setState((p) => {
+                    const playlist = playlists.find((pl) => pl.id === p.currentPlaylistId)
+                    if (playlist) {
+                      const currentIndex = playlist.tracks.findIndex((t) => t.id === p.currentTrackId)
+                      if (currentIndex < playlist.tracks.length - 1) {
+                        const nextTrack = playlist.tracks[currentIndex + 1]
+                        return {
+                          ...p,
+                          currentTrackId: nextTrack.id,
+                          progress: 0,
+                          isPlaying: true,
+                          history: [
+                            ...p.history,
+                            {
+                              trackId: p.currentTrackId!,
+                              playlistId: p.currentPlaylistId!,
+                              playedAt: new Date().toISOString(),
+                            },
+                          ],
+                        }
+                      }
+                    }
+                    return { ...p, isPlaying: false, progress: 1 }
+                  })
+                },
+              }
+            )
+          }, 50)
+        }
       }
       return { ...prev, progress: newProgress }
     })
-  }, [])
+  }, [playlists])
 
   const setPlaybackSpeed = useCallback((speed: number) => {
     setState((prev) => ({ ...prev, playbackSpeed: speed }))

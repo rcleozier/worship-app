@@ -147,6 +147,14 @@ export default function TrackPage() {
             <CardDescription>Learn what this passage means</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
+            {/* Life Situation Label */}
+            {track.lesson.lifeSituation && (
+              <div className="p-3 rounded-lg bg-muted/50 border border-border">
+                <p className="text-xs font-medium text-muted-foreground mb-1">When does this show up in real life?</p>
+                <p className="text-sm leading-relaxed">{track.lesson.lifeSituation}</p>
+              </div>
+            )}
+
             {/* In Plain English */}
             <div>
               <h3 className="text-sm font-semibold mb-2 flex items-center gap-2">
@@ -164,15 +172,22 @@ export default function TrackPage() {
               <p className="text-sm leading-relaxed">{track.lesson.keyIdea}</p>
             </div>
 
-            {/* Reflection Question */}
+            {/* Behavioral Takeaway */}
+            {track.lesson.behavioralTakeaway && (
+              <div className="p-4 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                <h3 className="text-sm font-semibold mb-2">Try This Today</h3>
+                <p className="text-sm leading-relaxed">{track.lesson.behavioralTakeaway}</p>
+              </div>
+            )}
+
+            {/* Reflection Question - Now more action-oriented */}
             <div>
-              <h3 className="text-sm font-semibold mb-2">Reflection</h3>
+              <h3 className="text-sm font-semibold mb-2">Practice</h3>
               <p className="text-sm leading-relaxed text-muted-foreground mb-3">
                 {track.lesson.reflectionQuestion}
               </p>
               <div className="p-3 rounded-lg bg-muted text-sm italic">
-                Take a moment to think about this question. There's no right or wrong answer - it's
-                about what this verse means to you.
+                This is optional. Take your time, and there's no right or wrong way to engage with it.
               </div>
             </div>
 

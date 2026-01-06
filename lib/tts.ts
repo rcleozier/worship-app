@@ -14,9 +14,12 @@ class TTSService {
   private utterance: SpeechSynthesisUtterance | null = null
   private isSpeaking = false
   private startTime = 0
+  private pauseStartTime = 0
+  private totalPausedTime = 0
   private duration = 0
   private onProgress?: (progress: number) => void
   private onComplete?: () => void
+  private progressInterval: NodeJS.Timeout | null = null
 
   constructor() {
     // Check if browser supports speech synthesis
@@ -187,11 +190,19 @@ class TTSService {
     utterance.onstart = () => {
       this.isSpeaking = true
       this.startTime = Date.now()
+      this.totalPausedTime = 0
+      this.pauseStartTime = 0
     }
 
     utterance.onend = () => {
       this.isSpeaking = false
       this.utterance = null
+      this.totalPausedTime = 0
+      this.pauseStartTime = 0
+      if (this.progressInterval) {
+        clearInterval(this.progressInterval)
+        this.progressInterval = null
+      }
       if (this.onComplete) {
         this.onComplete()
       }
@@ -201,22 +212,56 @@ class TTSService {
       console.error("TTS Error:", event.error)
       this.isSpeaking = false
       this.utterance = null
+      this.totalPausedTime = 0
+      this.pauseStartTime = 0
+      if (this.progressInterval) {
+        clearInterval(this.progressInterval)
+        this.progressInterval = null
+      }
     }
 
-    // Progress tracking
+    // Progress tracking with pause/resume support
     if (this.onProgress) {
-      const progressInterval = setInterval(() => {
-        if (!this.isSpeaking) {
-          clearInterval(progressInterval)
+      // Clear any existing interval
+      if (this.progressInterval) {
+        clearInterval(this.progressInterval)
+      }
+      
+      this.progressInterval = setInterval(() => {
+        const isActuallySpeaking = this.isSpeaking && (speechSynthesis.speaking || speechSynthesis.pending)
+        
+        if (!isActuallySpeaking) {
+          if (this.progressInterval) {
+            clearInterval(this.progressInterval)
+            this.progressInterval = null
+          }
           return
         }
 
-        const elapsed = (Date.now() - this.startTime) / 1000 // in seconds
-        const progress = Math.min(elapsed / this.duration, 1)
-        this.onProgress(progress)
+        // Calculate elapsed time accounting for pauses
+        const now = Date.now()
+        let elapsed = (now - this.startTime) / 1000 // in seconds
+        
+        // Subtract total paused time
+        if (this.totalPausedTime > 0) {
+          elapsed -= this.totalPausedTime
+        }
+        
+        // If currently paused, don't count the current pause yet
+        if (this.pauseStartTime > 0 && speechSynthesis.paused) {
+          elapsed -= (now - this.pauseStartTime) / 1000
+        }
+
+        const progress = Math.min(Math.max(0, elapsed / this.duration), 1)
+        if (this.onProgress) {
+          this.onProgress(progress)
+        }
 
         if (progress >= 1) {
-          clearInterval(progressInterval)
+          if (this.progressInterval) {
+            clearInterval(this.progressInterval)
+            this.progressInterval = null
+          }
         }
       }, 100) // Update every 100ms
     }
@@ -232,7 +277,8 @@ class TTSService {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) {
       return
     }
-    if (this.isSpeaking) {
+    if (this.isSpeaking && !speechSynthesis.paused) {
+      this.pauseStartTime = Date.now()
       speechSynthesis.pause()
     }
   }
@@ -244,7 +290,11 @@ class TTSService {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) {
       return
     }
-    if (speechSynthesis.paused) {
+    if (speechSynthesis.paused && this.pauseStartTime > 0) {
+      // Add the pause duration to total paused time
+      const pauseDuration = (Date.now() - this.pauseStartTime) / 1000
+      this.totalPausedTime += pauseDuration
+      this.pauseStartTime = 0
       speechSynthesis.resume()
     }
   }
@@ -260,7 +310,13 @@ class TTSService {
     this.isSpeaking = false
     this.utterance = null
     this.startTime = 0
+    this.pauseStartTime = 0
+    this.totalPausedTime = 0
     this.duration = 0
+    if (this.progressInterval) {
+      clearInterval(this.progressInterval)
+      this.progressInterval = null
+    }
   }
 
   /**
@@ -270,7 +326,7 @@ class TTSService {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) {
       return false
     }
-    return this.isSpeaking && speechSynthesis.speaking
+    return this.isSpeaking && (speechSynthesis.speaking || speechSynthesis.pending)
   }
 
   /**

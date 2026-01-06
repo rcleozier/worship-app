@@ -257,6 +257,25 @@ export default function PlaylistPage() {
               )
             })}
           </div>
+
+          {/* End-of-Playlist Wrap-Up */}
+          {playlist.wrapUp && (
+            <div className="mt-8 pt-8 border-t border-border">
+              <Card className="bg-muted/30 border-primary/20">
+                <CardHeader>
+                  <div className="flex items-center gap-2 mb-2">
+                    <BookOpenCheck className="h-5 w-5 text-primary" />
+                    <CardTitle className="text-lg">What These Lessons Share</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm leading-relaxed text-foreground/90">
+                    {playlist.wrapUp}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          )}
         </div>
       </div>
     </div>
