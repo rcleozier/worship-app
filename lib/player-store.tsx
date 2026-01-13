@@ -13,6 +13,7 @@ interface PlayerContextType extends PlayerState {
   setPlaybackSpeed: (speed: number) => void
   currentTrack: Track | null
   currentPlaylist: Playlist | null
+  actualDuration: number // Actual calculated duration in minutes
 }
 
 const PlayerContext = createContext<PlayerContextType | undefined>(undefined)
@@ -42,6 +43,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const [playlists, setPlaylists] = useState<Playlist[]>([])
   const ttsProgressRef = useRef<number>(0)
   const seekStartProgressRef = useRef<number>(0) // Track where we started seeking from
+  const [actualDuration, setActualDuration] = useState<number>(0) // Track actual TTS duration in minutes
 
   // Load playlists
   useEffect(() => {
@@ -98,12 +100,33 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     return `${referenceText} ${verseTexts}.${explanationText}`
   }, [])
 
+  // Helper function to calculate actual duration in minutes based on text
+  const calculateDuration = useCallback((text: string, playbackSpeed: number = 1): number => {
+    // Count words
+    const wordCount = text.split(/\s+/).length
+    // TTS speed: ~150 words per minute at 1x speed
+    const wordsPerMinute = 150 * playbackSpeed
+    const minutes = wordCount / wordsPerMinute
+    return minutes
+  }, [])
+
   // Persist state
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("bible_player_state", JSON.stringify(state))
     }
   }, [state])
+
+  // Calculate duration when track changes
+  useEffect(() => {
+    if (currentTrack) {
+      const fullText = buildTrackText(currentTrack)
+      const duration = calculateDuration(fullText, state.playbackSpeed)
+      setActualDuration(duration)
+    } else {
+      setActualDuration(0)
+    }
+  }, [currentTrack?.id, state.playbackSpeed, buildTrackText, calculateDuration])
 
   // Text-to-Speech integration
   useEffect(() => {
@@ -122,6 +145,10 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         // Reset seek start position when starting fresh
         seekStartProgressRef.current = 0
         const fullText = buildTrackText(currentTrack)
+        
+        // Calculate and store actual duration
+        const duration = calculateDuration(fullText, state.playbackSpeed)
+        setActualDuration(duration)
 
         ttsService.speak(
           fullText,
@@ -194,6 +221,10 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       seekStartProgressRef.current = 0
       const fullText = buildTrackText(currentTrack)
       
+      // Recalculate duration with new speed
+      const duration = calculateDuration(fullText, state.playbackSpeed)
+      setActualDuration(duration)
+      
       ttsService.speak(
         fullText,
         {
@@ -241,14 +272,28 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const playTrack = useCallback((trackId: string, playlistId: string) => {
     // Cancel any existing TTS
     ttsService.cancel()
-    setState((prev) => ({
-      ...prev,
-      currentTrackId: trackId,
-      currentPlaylistId: playlistId,
-      isPlaying: true,
-      progress: 0,
-    }))
-  }, [])
+    setState((prev) => {
+      // Calculate duration for the new track
+      const track = playlists
+        .flatMap((p) => p.tracks)
+        .find((t) => t.id === trackId)
+      
+      if (track) {
+        const fullText = buildTrackText(track)
+        actualDurationRef.current = calculateDuration(fullText, prev.playbackSpeed)
+      } else {
+        actualDurationRef.current = 0
+      }
+      
+      return {
+        ...prev,
+        currentTrackId: trackId,
+        currentPlaylistId: playlistId,
+        isPlaying: true,
+        progress: 0,
+      }
+    })
+  }, [playlists, buildTrackText, calculateDuration])
 
   const togglePlay = useCallback(() => {
     setState((prev) => ({ ...prev, isPlaying: !prev.isPlaying }))
@@ -264,6 +309,11 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       const currentIndex = playlist.tracks.findIndex((t) => t.id === prev.currentTrackId)
       if (currentIndex < playlist.tracks.length - 1) {
         const nextTrack = playlist.tracks[currentIndex + 1]
+        
+        // Calculate duration for the new track
+        const fullText = buildTrackText(nextTrack)
+        actualDurationRef.current = calculateDuration(fullText, prev.playbackSpeed)
+        
         return {
           ...prev,
           currentTrackId: nextTrack.id,
@@ -281,7 +331,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       }
       return prev
     })
-  }, [playlists])
+  }, [playlists, buildTrackText, calculateDuration])
 
   const prevTrack = useCallback(() => {
     ttsService.cancel()
@@ -293,6 +343,11 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       const currentIndex = playlist.tracks.findIndex((t) => t.id === prev.currentTrackId)
       if (currentIndex > 0) {
         const prevTrack = playlist.tracks[currentIndex - 1]
+        
+        // Calculate duration for the new track
+        const fullText = buildTrackText(prevTrack)
+        actualDurationRef.current = calculateDuration(fullText, prev.playbackSpeed)
+        
         return {
           ...prev,
           currentTrackId: prevTrack.id,
@@ -302,7 +357,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       }
       return prev
     })
-  }, [playlists, buildTrackText])
+  }, [playlists, buildTrackText, calculateDuration])
 
   // Helper function to skip to a specific position in text
   const skipToPosition = useCallback((text: string, progress: number): string => {
@@ -335,6 +390,10 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
           
           // Build full text
           const fullText = buildTrackText(track)
+          
+          // Calculate and store actual duration
+          const duration = calculateDuration(fullText, prev.playbackSpeed)
+          setActualDuration(duration)
           
           // Skip to the requested position
           const textToRead = skipToPosition(fullText, newProgress)
@@ -418,6 +477,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         setPlaybackSpeed,
         currentTrack,
         currentPlaylist,
+        actualDuration: actualDuration || currentTrack?.estimatedMinutes || 0,
       }}
     >
       {children}

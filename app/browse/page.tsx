@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select"
 import { BookOpen, ChevronRight, ChevronLeft, Search, Grid, List } from "lucide-react"
 import Link from "next/link"
+import { getBookVisual } from "@/lib/book-visuals"
 
 interface BibleBook {
   name: string
@@ -91,28 +92,6 @@ export default function BrowsePage() {
     book.name.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
-  // Get visual color for book based on testament
-  const getBookColor = (testament: string, index: number) => {
-    if (testament === "Old") {
-      const colors = [
-        "from-amber-500 to-orange-600",
-        "from-emerald-500 to-teal-600",
-        "from-blue-500 to-indigo-600",
-        "from-violet-500 to-purple-600",
-        "from-rose-500 to-pink-600",
-      ]
-      return colors[index % colors.length]
-    } else {
-      const colors = [
-        "from-blue-500 to-cyan-600",
-        "from-purple-500 to-indigo-600",
-        "from-emerald-500 to-teal-600",
-        "from-amber-500 to-yellow-600",
-        "from-rose-500 to-pink-600",
-      ]
-      return colors[index % colors.length]
-    }
-  }
 
   return (
     <div className="flex flex-1 flex-col gap-8 p-6 md:p-8 bg-gradient-to-b from-background via-background to-background/95">
@@ -226,7 +205,6 @@ export default function BrowsePage() {
                       setSelectedBook(book.name)
                       setSelectedChapter(1)
                     }}
-                    gradient={getBookColor(book.testament, idx)}
                   />
                 ))}
               </div>
@@ -241,7 +219,6 @@ export default function BrowsePage() {
                       setSelectedBook(book.name)
                       setSelectedChapter(1)
                     }}
-                    gradient={getBookColor(book.testament, idx)}
                   />
                 ))}
               </div>
@@ -265,7 +242,6 @@ export default function BrowsePage() {
                       setSelectedBook(book.name)
                       setSelectedChapter(1)
                     }}
-                    gradient={getBookColor(book.testament, idx)}
                   />
                 ))}
               </div>
@@ -280,7 +256,6 @@ export default function BrowsePage() {
                       setSelectedBook(book.name)
                       setSelectedChapter(1)
                     }}
-                    gradient={getBookColor(book.testament, idx)}
                   />
                 ))}
               </div>
@@ -300,12 +275,12 @@ export default function BrowsePage() {
               <div 
                 className="relative h-48 overflow-hidden"
                 style={{
-                  backgroundImage: "url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&auto=format&fit=crop')",
+                  backgroundImage: `url('${getBookVisual(selectedBook).imageUrl}')`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${getBookColor(selectedBookData.testament, books.findIndex(b => b.name === selectedBook))} opacity-85`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${getBookVisual(selectedBook).gradient} opacity-85`} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
                 <div className="relative h-full flex flex-col justify-end p-6">
                   <Badge variant="secondary" className="w-fit mb-2 bg-white/20 text-white border-white/30 backdrop-blur-sm">
@@ -425,13 +400,13 @@ function BookCard({
   book,
   isSelected,
   onClick,
-  gradient,
 }: {
   book: BibleBook
   isSelected: boolean
   onClick: () => void
-  gradient: string
 }) {
+  const visual = getBookVisual(book.name)
+  
   return (
     <Card
       className={`group cursor-pointer transition-all duration-300 overflow-hidden border-0 shadow-md hover:shadow-xl hover:-translate-y-1 ${
@@ -443,12 +418,12 @@ function BookCard({
       <div
         className="relative h-32 overflow-hidden"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format&fit=crop')",
+          backgroundImage: `url('${visual.imageUrl}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-90`} />
+        <div className={`absolute inset-0 bg-gradient-to-br ${visual.gradient} opacity-90`} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
         <div className="relative h-full flex items-center justify-center">
           <BookOpen className="h-12 w-12 text-white opacity-60" />
@@ -467,13 +442,13 @@ function BookListItem({
   book,
   isSelected,
   onClick,
-  gradient,
 }: {
   book: BibleBook
   isSelected: boolean
   onClick: () => void
-  gradient: string
 }) {
+  const visual = getBookVisual(book.name)
+  
   return (
     <Card
       className={`group cursor-pointer transition-all duration-300 overflow-hidden border-0 shadow-sm hover:shadow-md hover:bg-accent/30 ${
@@ -487,12 +462,12 @@ function BookListItem({
           <div
             className="relative h-14 w-14 rounded-lg overflow-hidden shrink-0 shadow-md"
             style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop')",
+              backgroundImage: `url('${visual.imageUrl}')`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           >
-            <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-85`} />
+            <div className={`absolute inset-0 bg-gradient-to-br ${visual.gradient} opacity-85`} />
             <div className="relative h-full flex items-center justify-center">
               <BookOpen className="h-6 w-6 text-white opacity-70" />
             </div>

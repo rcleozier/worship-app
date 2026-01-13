@@ -131,8 +131,9 @@ export function NowPlayingBar() {
     return `${mins}:${secs.toString().padStart(2, "0")}`
   }
 
-  const currentTime = player.currentTrack.estimatedMinutes * player.progress
-  const totalTime = player.currentTrack.estimatedMinutes
+  // Use actual duration if available, otherwise fall back to estimated
+  const totalTime = player.actualDuration || player.currentTrack.estimatedMinutes || 0
+  const currentTime = totalTime * player.progress
 
   // Get playlist visual for cover thumbnail
   const playlistVisual = player.currentPlaylist 

@@ -37,11 +37,11 @@ export function getAvailableVoices(): VoiceInfo[] {
           name.includes("google") ||
           name.includes("microsoft") ||
           name.includes("amazon"),
-        gender: name.includes("male") || name.includes("daniel") || name.includes("david") || name.includes("alex")
+        gender: (name.includes("male") || name.includes("daniel") || name.includes("david") || name.includes("alex")
           ? "male"
           : name.includes("female") || name.includes("samantha") || name.includes("zira")
           ? "female"
-          : undefined,
+          : undefined) as "male" | "female" | undefined,
         quality: name.includes("neural") || name.includes("premium") || name.includes("enhanced")
           ? "high"
           : name.includes("google") || name.includes("microsoft") || name.includes("samantha") || name.includes("alex")
