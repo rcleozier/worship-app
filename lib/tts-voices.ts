@@ -42,11 +42,11 @@ export function getAvailableVoices(): VoiceInfo[] {
           : name.includes("female") || name.includes("samantha") || name.includes("zira")
           ? "female"
           : undefined) as "male" | "female" | undefined,
-        quality: name.includes("neural") || name.includes("premium") || name.includes("enhanced")
+        quality: (name.includes("neural") || name.includes("premium") || name.includes("enhanced")
           ? "high"
           : name.includes("google") || name.includes("microsoft") || name.includes("samantha") || name.includes("alex")
           ? "high"
-          : "medium",
+          : "medium") as "high" | "medium" | "low",
       }
     })
     .sort((a, b) => {

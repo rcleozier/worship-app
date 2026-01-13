@@ -272,27 +272,36 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const playTrack = useCallback((trackId: string, playlistId: string) => {
     // Cancel any existing TTS
     ttsService.cancel()
-    setState((prev) => {
-      // Calculate duration for the new track
-      const track = playlists
-        .flatMap((p) => p.tracks)
-        .find((t) => t.id === trackId)
-      
-      if (track) {
-        const fullText = buildTrackText(track)
-        actualDurationRef.current = calculateDuration(fullText, prev.playbackSpeed)
-      } else {
-        actualDurationRef.current = 0
-      }
-      
-      return {
+    
+    // Calculate duration for the new track
+    const track = playlists
+      .flatMap((p) => p.tracks)
+      .find((t) => t.id === trackId)
+    
+    if (track) {
+      const fullText = buildTrackText(track)
+      setState((prev) => {
+        const duration = calculateDuration(fullText, prev.playbackSpeed)
+        // Set duration after state update
+        setTimeout(() => setActualDuration(duration), 0)
+        return {
+          ...prev,
+          currentTrackId: trackId,
+          currentPlaylistId: playlistId,
+          isPlaying: true,
+          progress: 0,
+        }
+      })
+    } else {
+      setActualDuration(0)
+      setState((prev) => ({
         ...prev,
         currentTrackId: trackId,
         currentPlaylistId: playlistId,
         isPlaying: true,
         progress: 0,
-      }
-    })
+      }))
+    }
   }, [playlists, buildTrackText, calculateDuration])
 
   const togglePlay = useCallback(() => {
@@ -310,9 +319,12 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       if (currentIndex < playlist.tracks.length - 1) {
         const nextTrack = playlist.tracks[currentIndex + 1]
         
-        // Calculate duration for the new track
+        // Calculate duration for the new track (will be set outside setState)
         const fullText = buildTrackText(nextTrack)
-        actualDurationRef.current = calculateDuration(fullText, prev.playbackSpeed)
+        const duration = calculateDuration(fullText, prev.playbackSpeed)
+        
+        // Set duration after state update
+        setTimeout(() => setActualDuration(duration), 0)
         
         return {
           ...prev,
@@ -344,9 +356,12 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       if (currentIndex > 0) {
         const prevTrack = playlist.tracks[currentIndex - 1]
         
-        // Calculate duration for the new track
+        // Calculate duration for the new track (will be set outside setState)
         const fullText = buildTrackText(prevTrack)
-        actualDurationRef.current = calculateDuration(fullText, prev.playbackSpeed)
+        const duration = calculateDuration(fullText, prev.playbackSpeed)
+        
+        // Set duration after state update
+        setTimeout(() => setActualDuration(duration), 0)
         
         return {
           ...prev,
@@ -393,7 +408,8 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
           
           // Calculate and store actual duration
           const duration = calculateDuration(fullText, prev.playbackSpeed)
-          setActualDuration(duration)
+          // Set duration after state update
+          setTimeout(() => setActualDuration(duration), 0)
           
           // Skip to the requested position
           const textToRead = skipToPosition(fullText, newProgress)
